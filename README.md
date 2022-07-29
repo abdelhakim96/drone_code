@@ -1,5 +1,9 @@
 # drone_code
 ## Jetson TX2 drone
+password
+```bash
+lea
+```
 
 ```bash
 ssh lea@192.168.0.59
@@ -9,4 +13,14 @@ ssh lea@192.168.0.59
 ./JetsonTX2_drone
 ```
 
-## 
+## Upboard
+password
+```bash
+1234
+```
+
+
+
+```bash
+ssh anoertoft@192.168.0.29
+```
