@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <image_transport/image_transport.h>
 //#include <opencv2/highgui/highgui.hpp>
-#include <cv_bridge/cv_bridge.h>
+//#include <cv_bridge/cv_bridge.h>
 //#include <airsim_ros_wrapper.h>
 #include <fstream>
 #include <iostream>
@@ -11,7 +11,7 @@
 #include "std_msgs/Float64.h"
 #include <ros/ros.h>
 #include <image_transport/image_transport.h>
-#include <cv_bridge/cv_bridge.h>
+//#include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 //#include <opencv2/imgproc/imgproc.hpp>
 #include <geometry_msgs/PoseStamped.h>
