@@ -127,8 +127,7 @@ void NMPC_PC::publish_rpyFz(struct command_struct& commandstruct)
 
     att_thro_msg.thrust = commandstruct.control_thrust_vec[1];  // scaled thrust
 
-   
-    att_throttle_pub.publish(att_thro_msg);
+    
 
     geometry_msgs::PoseStamped attitude_msg;
     tf::Quaternion q(attitude_msg.pose.orientation.x,
@@ -144,6 +143,20 @@ void NMPC_PC::publish_rpyFz(struct command_struct& commandstruct)
     attitude_msg.pose.orientation.y = q.getY();
     attitude_msg.pose.orientation.z = q.getZ();
     attitude_msg.pose.orientation.w = q.getW();
+
+
+
+    // virtual cage
+    if ((abs(current_pos_att.at(0)))>5 || (abs(current_pos_att.at(1)))>5 || (abs(current_pos_att.at(2)))>3)
+    {
+        attitude_msg.pose.orientation.x = 0;
+        attitude_msg.pose.orientation.y = 0;
+        attitude_msg.pose.orientation.z = 0;
+        attitude_msg.pose.orientation.w = 1; 
+        att_thro_msg.thrust = 0;
+    } 
+   
+    att_throttle_pub.publish(att_thro_msg);
     attitude_pub.publish(attitude_msg);
 
     std_msgs::Float64MultiArray rpy_msg;
