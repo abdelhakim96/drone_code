@@ -24,3 +24,16 @@ password
 ```bash
 ssh anoertoft@192.168.0.29
 ```
+kaffe
+ssh kaffe@192.168.0.24
+
+```bash
+ssh kaffe@192.168.0.24
+```
+
+
+etc folder:
+
+get px4 firmware ready
+px4:
+1.11.3
