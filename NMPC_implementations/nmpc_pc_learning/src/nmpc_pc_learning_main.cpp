@@ -115,7 +115,19 @@ void NMPC_PC::publish_rpyFz(struct command_struct& commandstruct)
     mavros_msgs::Thrust att_thro_msg;
     att_thro_msg.header.frame_id = "";
     att_thro_msg.header.stamp = ros::Time::now();
+    
+
+    // trim the thrust for testing
+    if (commandstruct.control_thrust_vec[1]>0.6)
+    {
+       commandstruct.control_thrust_vec[1]=0.6;
+    } 
+
+
+
     att_thro_msg.thrust = commandstruct.control_thrust_vec[1];  // scaled thrust
+
+   
     att_throttle_pub.publish(att_thro_msg);
 
     geometry_msgs::PoseStamped attitude_msg;
