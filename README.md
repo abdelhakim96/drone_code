@@ -18,7 +18,7 @@ password
 ```bash
 1234
 ```
-
+connect to asl_vicon wifi
 
 
 ```bash
