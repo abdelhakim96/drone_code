@@ -28,7 +28,7 @@ kaffe
 ssh kaffe@192.168.0.24
 
 ```bash
-ssh kaffe@192.168.0.24
+ssh kaffe@192.168.0.44
 ```
 
 
