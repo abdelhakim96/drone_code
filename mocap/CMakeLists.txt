@@ -61,3 +61,7 @@ include_directories(${PROJECT_NAME}_LIBRARY PRIVATE
 add_executable(mocap_bridge_gazebo src/mocap_bridge_gazebo.cpp)
 target_link_libraries(mocap_bridge_gazebo ${catkin_LIBRARIES})
 
+
+add_executable(mocap_bridge_vicon src/mocap_bridge_vicon.cpp)
+target_link_libraries(mocap_bridge_vicon ${catkin_LIBRARIES})
+
