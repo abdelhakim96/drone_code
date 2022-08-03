@@ -34,6 +34,10 @@ ssh kaffe@192.168.0.24
 
 etc folder:
 
-get px4 firmware ready
-px4:
+## px4
+
+px4 version
 1.11.3
+
+installation guide 
+https://docs.px4.io/main/en/config/firmware.html
