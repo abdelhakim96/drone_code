@@ -43,5 +43,7 @@ installation guide
 https://docs.px4.io/main/en/config/firmware.html
 
 download the file px4_fmu-v5_default.px4 and upload from this https://github.com/PX4/PX4-Autopilot/releases/tag/v1.11.3
+##Tips
 
+- Drone can online disarm in manual control
 
