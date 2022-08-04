@@ -47,3 +47,11 @@ download the file px4_fmu-v5_default.px4 and upload from this https://github.com
 
 - Drone can only disarm in manual control
 
+
+##Tips
+Cannot Switch to offboard mode:
+- Problem with height estimate 
+- problem with parameter
+-Problem with EKF2 estimate
+- mavros baudrate 
+
