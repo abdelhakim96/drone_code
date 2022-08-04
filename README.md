@@ -57,29 +57,33 @@ Cannot Switch to offboard mode:
 
 ## Run MPC instructions
 
-ssh to drone lea
 - open 4 tabs in terminator
 - ssh to drone (lea)
 ```bash
-ssh kaffe@192.168.0.24
+ssh lea@192.168.0.59
+```
+- run TX2 startup script
+```bash
+ ./JetsonTX2_drone_start.sh
 ```
 - run mavros 
+``
+geometric controller script
+```
+
 - run vicon bridge vicon.launch
 ```bash
 roslaunch vicon_bridge mocap_bridge_vicon.launch
 ```
-
-
 - run mocap bridge
 ```bash
 roslaunch mocap mocap_bridge_vicon.launch
 ```
 - run nmpc
-
 ```bash
 roslaunch nmpc_pc_learning nmpc_pc_learning_indoor.launch
 ```
-- on laptop provide trajectory 
+- *on laptop:* provide trajectory 
 
 ```bash
 roslaunch dji_m100_trajectory m100_trajectory_v2_indoor.launch 
