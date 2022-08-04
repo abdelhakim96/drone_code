@@ -60,28 +60,30 @@ Cannot Switch to offboard mode:
 ssh to drone lea
 - open 4 tabs in terminator
 - ssh to drone (lea)
-'''bash
+```bash
 ssh kaffe@192.168.0.24
-'''
+```
 - run mavros 
 - run vicon bridge vicon.launch
-'''bash
+```bash
 roslaunch vicon_bridge mocap_bridge_vicon.launch
-'''
+```
+
 
 - run mocap bridge
-'''bash
+```bash
 roslaunch mocap mocap_bridge_vicon.launch
-'''
+```
 - run nmpc
-'''bash
-roslaunch nmpc_pc_learning nmpc_pc_learning_indoor.launch
-'''
-- on laptop provide trajectory 
-'''bash
 
+```bash
+roslaunch nmpc_pc_learning nmpc_pc_learning_indoor.launch
+```
+- on laptop provide trajectory 
+
+```bash
 roslaunch dji_m100_trajectory m100_trajectory_v2_indoor.launch 
-'''
+```
 
 - tick on circular trajectory
 
