@@ -68,7 +68,7 @@ ssh lea@192.168.0.59
 ```
 - run mavros 
 ```bash
-geometric controller script
+roslaunch simple_mavros mavros.launch
 ```
 
 - run vicon bridge vicon.launch
