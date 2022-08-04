@@ -83,7 +83,15 @@ roslaunch mocap mocap_bridge_vicon.launch
 ```bash
 roslaunch nmpc_pc_learning nmpc_pc_learning_indoor.launch
 ```
-- *on laptop:* provide trajectory 
+- connect laptop to drone
+```bash
+export ROS_MASTER_URI=http://192.168.0.59:11311
+export ROS_IP=192.168.0.72
+```
+
+
+
+- **on laptop:** provide trajectory 
 
 ```bash
 roslaunch dji_m100_trajectory m100_trajectory_v2_indoor.launch 
