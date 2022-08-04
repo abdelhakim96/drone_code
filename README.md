@@ -67,7 +67,7 @@ ssh lea@192.168.0.59
  ./JetsonTX2_drone_start.sh
 ```
 - run mavros 
-``
+```bash
 geometric controller script
 ```
 
