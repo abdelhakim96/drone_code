@@ -15,13 +15,7 @@
 
 
 
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/quad_F330.xml" /> -->
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/quad_diatone.xml" /> -->
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/quad_martianVI.xml" /> -->
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/matrice_100.xml" /> -->
-    <include file="$(find nmpc_pc_learning)/launch/airframes/matrice_100_gazebo.xml" />
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/tricopter_talon.xml" /> -->
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/tricopter_white.xml" /> -->
-    <!-- <include file="$(find nmpc_pc_learning)/launch/airframes/tricopter_microscale.xml" /> -->
+    <include file="$(find nmpc_pc_learning)/launch/airframes/lea.xml" />
+
 
 </launch>
