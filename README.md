@@ -1,4 +1,18 @@
 # drone_code
+
+Vicon Computer pass
+```bash
+AU_parrot_2018
+```
+
+
+
+Connect to ASL_Vicon wi-fi password
+```bash
+1234567890
+```
+
+
 ## Jetson TX2 drone
 password
 ```bash
