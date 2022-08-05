@@ -10,6 +10,7 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <mavros_msgs/Thrust.h>
+#include <nav_msgs/Odometry.h>
 #include <tf/tf.h>
 
 #include <nmpc_pc_learning.h>
