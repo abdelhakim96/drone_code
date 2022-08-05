@@ -15,6 +15,7 @@ using namespace ros;
 double sampleTime = 0.02;
 
 mavros_msgs::State current_state_msg;
+nav_msgs::Odometry mpc_msg;
 void state_cb(const mavros_msgs::State::ConstPtr& msg)
 {
     current_state_msg = *msg;
@@ -202,6 +203,9 @@ int main(int argc, char** argv)
     // ----------
     att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("/controller/mpc_setpoint_thrust", 1, true);
     attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("/controller/mpc_setpoint_attitude", 1, true);
+
+    mpc_ref_pub = nh.advertise<nav_msgs::Odometry>("/mpc_ref", 1, true);
+
     nmpc_cmd_rpy_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/rpy", 1, true);
     nmpc_cmd_Fz_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/Fz_FzScaled", 1, true);
     nmpc_cmd_exeTime_pub = nh.advertise<std_msgs::Float64>("outer_nmpc_cmd/exeTime", 1, true);
@@ -334,8 +338,13 @@ int main(int argc, char** argv)
           //  ref_trajectory = {
            //     ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
 
-             // ref_trajectory = { 0, 0, 1, 0, 0, 0};
-                ref_trajectory = {    ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
+             ref_trajectory = { 0, 0, 1, 0, 0, 0};
+             mpc_msg.pose.pose.point.x= ref_trajectory.at(0);
+             mpc_msg.pose.pose.point.x= ref_trajectory.at(1);
+             mpc_msg.pose.pose.point.x= ref_trajectory.at(2);
+
+             mpc_ref_pub.pub=mpc_msg;
+               // ref_trajectory = {    ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
 
             online_data.distFx = dist_Fx.data;
             online_data.distFy = dist_Fy.data;
