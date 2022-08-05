@@ -115,19 +115,8 @@ void NMPC_PC::publish_rpyFz(struct command_struct& commandstruct)
     mavros_msgs::Thrust att_thro_msg;
     att_thro_msg.header.frame_id = "";
     att_thro_msg.header.stamp = ros::Time::now();
-    
-
-    // trim the thrust for testing
-    if (commandstruct.control_thrust_vec[1]>0.6)
-    {
-       commandstruct.control_thrust_vec[1]=0.6;
-    } 
-
-
-
     att_thro_msg.thrust = commandstruct.control_thrust_vec[1];  // scaled thrust
-
-    
+    att_throttle_pub.publish(att_thro_msg);
 
     geometry_msgs::PoseStamped attitude_msg;
     tf::Quaternion q(attitude_msg.pose.orientation.x,
@@ -143,20 +132,6 @@ void NMPC_PC::publish_rpyFz(struct command_struct& commandstruct)
     attitude_msg.pose.orientation.y = q.getY();
     attitude_msg.pose.orientation.z = q.getZ();
     attitude_msg.pose.orientation.w = q.getW();
-
-
-
-    // virtual cage
-    if ((abs(current_pos_att.at(0)))>5 || (abs(current_pos_att.at(1)))>5 || (abs(current_pos_att.at(2)))>3)
-    {
-        attitude_msg.pose.orientation.x = 0;
-        attitude_msg.pose.orientation.y = 0;
-        attitude_msg.pose.orientation.z = 0;
-        attitude_msg.pose.orientation.w = 1; 
-        att_thro_msg.thrust = 0;
-    } 
-   
-    att_throttle_pub.publish(att_thro_msg);
     attitude_pub.publish(attitude_msg);
 
     std_msgs::Float64MultiArray rpy_msg;
@@ -225,8 +200,8 @@ int main(int argc, char** argv)
     // ----------
     // Publishers
     // ----------
-    att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("mavros/setpoint_attitude/thrust", 1, true);
-    attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/attitude", 1, true);
+    att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("/controller/mpc_setpoint_thrust", 1, true);
+    attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("/controller/mpc_setpoint_attitude", 1, true);
     nmpc_cmd_rpy_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/rpy", 1, true);
     nmpc_cmd_Fz_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/Fz_FzScaled", 1, true);
     nmpc_cmd_exeTime_pub = nh.advertise<std_msgs::Float64>("outer_nmpc_cmd/exeTime", 1, true);
@@ -356,8 +331,10 @@ int main(int argc, char** argv)
                               current_vel_rate.at(5)};
 
             // Setting up references [x,y,z,u,v,w]
-            ref_trajectory = {
-                ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
+          //  ref_trajectory = {
+           //     ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
+
+              ref_trajectory = { 0, 0, 1, 0, 0, 0};
 
             online_data.distFx = dist_Fx.data;
             online_data.distFy = dist_Fy.data;
