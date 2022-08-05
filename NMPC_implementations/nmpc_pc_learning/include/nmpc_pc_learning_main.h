@@ -37,7 +37,7 @@ ros::Publisher nmpc_cmd_Fz_pub;
 ros::Publisher nmpc_cmd_exeTime_pub;
 ros::Publisher nmpc_cmd_kkt_pub;
 ros::Publisher nmpc_cmd_obj_pub;
-
+ros::Publisher mpc_ref_pub;
 nmpc_struct_ nmpc_struct;
 online_data_struct_ online_data;
 
