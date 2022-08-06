@@ -137,7 +137,7 @@ roslaunch nmpc_pc_learning nmpc_pc_learning_indoor.launch
 ```
 - connect laptop to drone
 ```bash
-export ROS_MASTER_URI=http://192.168.0.59:11311
+export ROS_MASTER_URI=http://192.168.0.60:11311
 export ROS_IP=192.168.0.72
 ```
 
