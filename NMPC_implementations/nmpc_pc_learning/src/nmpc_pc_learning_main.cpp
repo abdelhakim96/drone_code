@@ -201,7 +201,7 @@ int main(int argc, char** argv)
     // Publishers
     // ----------
     att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("mavros/setpoint_attitude/thrust", 1, true);
-    attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/cmd_vel", 1, true);
+    attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/attitude", 1, true);
     nmpc_cmd_rpy_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/rpy", 1, true);
     nmpc_cmd_Fz_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/Fz_FzScaled", 1, true);
     nmpc_cmd_exeTime_pub = nh.advertise<std_msgs::Float64>("outer_nmpc_cmd/exeTime", 1, true);
