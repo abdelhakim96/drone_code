@@ -156,7 +156,7 @@ run rqt_reconfigure rqt_reconfigure
 
 
 # TODO - 6/8
-- Upload code on kakao
-- Clean the repo from other folders
-- run NMPC, also with VICON
+- Upload code on kakao - check
+- Clean the repo from other folders - check
+- run NMPC, also with VICON 
 - run the NMPC with hovering from trajectory
