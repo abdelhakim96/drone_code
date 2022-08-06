@@ -10,7 +10,6 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <mavros_msgs/Thrust.h>
-#include <nav_msgs/Odometry.h>
 #include <tf/tf.h>
 
 #include <nmpc_pc_learning.h>
@@ -38,7 +37,7 @@ ros::Publisher nmpc_cmd_Fz_pub;
 ros::Publisher nmpc_cmd_exeTime_pub;
 ros::Publisher nmpc_cmd_kkt_pub;
 ros::Publisher nmpc_cmd_obj_pub;
-ros::Publisher mpc_ref_pub;
+
 nmpc_struct_ nmpc_struct;
 online_data_struct_ online_data;
 
