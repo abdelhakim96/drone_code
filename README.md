@@ -79,19 +79,19 @@ Cannot Switch to offboard mode:
 - Check when running the vicon feeder and mocap that they topic is available and that they match.
 
 
-## Battery Check 
+## B) Battery Check 
 - Battery is charged (Voltage>11.7).
 - Securely fastened to the drone.
 
 
 
-## Cables Check
+## C) Cables Check
 - No hanging cabled
 - No cables near the propeller
 - No exposed wires
 - All legs are placed and secured
 
-## R.C Check
+## D) R.C Check
 - Vehicle arms and disarms
 - Mode change is possible
 
