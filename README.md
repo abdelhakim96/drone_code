@@ -100,7 +100,7 @@ Cannot Switch to offboard mode:
 #
 
 
-## Run MPC instructions
+# Run MPC instructions
 
 - open 4 tabs in terminator
 - ssh to drone (lea)
