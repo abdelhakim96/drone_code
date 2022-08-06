@@ -70,8 +70,8 @@ Cannot Switch to offboard mode:
 - mavros baudrate 
 
 
-## Testing Checks
-# A) Vicon System Check
+# Testing Checks
+## A) Vicon System Check
 - All markers are placed securely in their designated postion
 - Infrared cameras are green and ready 
 - The correct drone name is ticked **(IMPORTANT)** 
@@ -79,19 +79,19 @@ Cannot Switch to offboard mode:
 - Check when running the vicon feeder and mocap that they topic is available and that they match.
 
 
-# Battery Check 
+## Battery Check 
 - Battery is charged (Voltage>11.7).
 - Securely fastened to the drone.
 
 
 
-# Cables Check
+## Cables Check
 - No hanging cabled
 - No cables near the propeller
 - No exposed wires
 - All legs are placed and secured
 
-# R.C Check
+## R.C Check
 - Vehicle arms and disarms
 - Mode change is possible
 
