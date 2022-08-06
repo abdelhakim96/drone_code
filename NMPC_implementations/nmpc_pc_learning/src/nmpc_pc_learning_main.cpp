@@ -201,8 +201,8 @@ int main(int argc, char** argv)
     // ----------
     // Publishers
     // ----------
-    att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("/controller/mpc_setpoint_thrust", 1, true);
-    attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("/controller/mpc_setpoint_attitude", 1, true);
+    att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("mavros/setpoint_attitude/thrust", 1, true);
+    attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/attitude", 1, true);
 
     mpc_ref_pub = nh.advertise<nav_msgs::Odometry>("/mpc_ref", 1, true);
 

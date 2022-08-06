@@ -15,7 +15,7 @@
 
 
 
-    <include file="$(find nmpc_pc_learning)/launch/airframes/lea.xml" />
+    <include file="$(find nmpc_pc_learning)/launch/airframes/kakao.xml" />
 
 
 </launch>
