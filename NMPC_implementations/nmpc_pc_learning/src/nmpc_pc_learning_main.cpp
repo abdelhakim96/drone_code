@@ -331,7 +331,7 @@ int main(int argc, char** argv)
 
             // Setting up references [x,y,z,u,v,w]
             ref_trajectory = {
-                ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
+                ref_position(0), ref_position(1), ref_position(2), 0.0, 0.0, 0.0};
 
             //  ref_trajectory = { 0, 0, 1, 0, 0, 0};
 
