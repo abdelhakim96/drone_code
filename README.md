@@ -77,6 +77,7 @@ Cannot Switch to offboard mode:
 - The correct drone name is ticked **(IMPORTANT)** 
 - Check that all markers are visible and non blinking
 - Check when running the vicon feeder and mocap that they topic is available and that they match.
+- Check that the Vicon is not paused
 
 
 ## B) Battery Check 
@@ -94,6 +95,12 @@ Cannot Switch to offboard mode:
 ## D) R.C Check
 - Vehicle arms and disarms
 - Mode change is possible
+
+
+## D) Running the code on the drone
+- run the Jetson bash
+- Check ping
+- Check the Vicon feeder 
 
 
 
