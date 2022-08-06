@@ -312,7 +312,7 @@ int main(int argc, char** argv)
             }
         }
 
-        while (ros::ok() && current_state_msg.mode == "OFFBOARD" && !control_stop)
+        while (ros::ok()  && !control_stop)
         {
             if (online_ref_yaw)
             {
