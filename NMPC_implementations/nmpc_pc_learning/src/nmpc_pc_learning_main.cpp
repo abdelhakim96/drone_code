@@ -184,7 +184,7 @@ int main(int argc, char** argv)
 
     ref_position_sub = nh.subscribe<geometry_msgs::Vector3>("ref_trajectory/position", 1, ref_position_cb);
     ref_velocity_sub = nh.subscribe<geometry_msgs::Vector3>("ref_trajectory/velocity", 1, ref_velocity_cb);
-    ref_yaw_sub = nh.subscribe<std_msgs::Float64>("/yaw_i", 1, ref_yaw_cb);
+    ref_yaw_sub = nh.subscribe<std_msgs::Float64>("ref_trajectory/yaw", 1, ref_yaw_cb);
     //    pos_sub = private_nh.subscribe<geometry_msgs::PoseStamped>("mavros/local_position/pose", 1, pos_cb);
     //    vel_sub = private_nh.subscribe<geometry_msgs::TwistStamped>("mavros/local_position/velocity", 1, vel_cb);
     pos_sub = nh.subscribe<geometry_msgs::PoseStamped>("mavros/" + mocap_topic_part + "/pose", 1, pos_cb);
@@ -308,12 +308,11 @@ int main(int argc, char** argv)
             }
         }
 
-        while (ros::ok() && !control_stop)
+        while (ros::ok() && current_state_msg.mode == "OFFBOARD" && !control_stop)
         {
             if (online_ref_yaw)
             {
-                //nmpc_struct.U_ref(2) = ref_yaw_rad;
-                nmpc_struct.U_ref(2) = 0;
+                nmpc_struct.U_ref(2) = ref_yaw_rad;
             }
             t_cc_loop = ros::Time::now().toSec() - t;
             if (std::fmod(std::abs(t_cc_loop - (int)(t_cc_loop)), (double)(sampleTime)) == 0)
@@ -332,12 +331,10 @@ int main(int argc, char** argv)
                               current_vel_rate.at(5)};
 
             // Setting up references [x,y,z,u,v,w]
-           // ref_trajectory = {
-            //    ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
+          //  ref_trajectory = {
+           //     ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
 
-       ref_trajectory = {
-                ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
-
+              ref_trajectory = { 0, 0, 1, 0, 0, 0};
 
             online_data.distFx = dist_Fx.data;
             online_data.distFy = dist_Fy.data;
