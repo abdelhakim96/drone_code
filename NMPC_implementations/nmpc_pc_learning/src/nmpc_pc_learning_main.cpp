@@ -204,7 +204,7 @@ int main(int argc, char** argv)
     att_throttle_pub = nh.advertise<mavros_msgs::Thrust>("mavros/setpoint_attitude/thrust", 1, true);
     attitude_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/attitude", 1, true);
 
-    mpc_ref_pub = nh.advertise<nav_msgs::Odometry>("/mpc_ref", 1, true);
+   // mpc_ref_pub = nh.advertise<nav_msgs::Odometry>("/mpc_ref", 1, true);
 
     nmpc_cmd_rpy_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/rpy", 1, true);
     nmpc_cmd_Fz_pub = nh.advertise<std_msgs::Float64MultiArray>("outer_nmpc_cmd/Fz_FzScaled", 1, true);
@@ -338,9 +338,9 @@ int main(int argc, char** argv)
             //ref_trajectory = {   ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
 
              //ref_trajectory = { 0, 0, 1, 0, 0, 0};
-            // ref_trajectory = { 0, 0, 1, 0, 0, 0};
+             ref_trajectory = { 0, 0, 1, 0, 0, 0};
        
-            ref_trajectory = {    ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
+           // ref_trajectory = {    ref_position(0), ref_position(1), ref_position(2), ref_velocity(0), ref_velocity(1), ref_velocity(2)};
 
             online_data.distFx = dist_Fx.data;
             online_data.distFy = dist_Fy.data;
