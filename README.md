@@ -134,16 +134,22 @@ export ROS_MASTER_URI=http://192.168.0.59:11311
 export ROS_IP=192.168.0.72
 ```
 
-
+```bash
+roslaunch dji_m100_trajectory m100_trajectory_v2_indoor.launch 
+```
 
 - **on laptop:** provide trajectory 
 
 ```bash
-roslaunch dji_m100_trajectory m100_trajectory_v2_indoor.launch 
+run rqt_reconfigure rqt_reconfigure
 ```
 
 - tick on circular trajectory
 
 
 
-
+# TODO - 6/8
+- Upload code on kakao
+- Clean the repo from other folders
+- run NMPC, also with VICON
+- run the NMPC with hovering from trajectory
