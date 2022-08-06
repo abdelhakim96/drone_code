@@ -1,6 +1,6 @@
 <launch>
     <node name="mocap_bridge_vicon" pkg="mocap" type="mocap_bridge_vicon" output="screen" />
     <!--param name="uav_name" value="martianVI" /-->
-    <param name="uav_name" value="lea" />
+    <param name="uav_name" value="kakao" />
     <param name="estimator_type" type="int" value="2" /> <!-- Parameter to set the estimator type. LPE:0, EKF2:1, LPE+EKF2=2. -->
 </launch>
