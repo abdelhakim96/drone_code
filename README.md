@@ -1,5 +1,5 @@
 # Drone_code
-
+## Passwords and ssh info 
 Vicon Computer pass
 ```bash
 AU_parrot_2018
@@ -13,7 +13,7 @@ Connect to ASL_Vicon wi-fi password
 ```
 
 
-## Jetson TX2 drone
+ Jetson TX2 drone
 password
 ```bash
 lea
@@ -27,7 +27,7 @@ ssh lea@192.168.0.59
 ./JetsonTX2_drone
 ```
 
-## Upboard
+ Upboard
 password
 ```bash
 1234
