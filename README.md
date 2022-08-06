@@ -69,6 +69,37 @@ Cannot Switch to offboard mode:
 -Problem with EKF2 estimate
 - mavros baudrate 
 
+
+## Testing Checks
+# A) Vicon System Check
+- All markers are placed securely in their designated postion
+- Infrared cameras are green and ready 
+- The correct drone name is ticked **(IMPORTANT)** 
+- Check that all markers are visible and non blinking
+- Check when running the vicon feeder and mocap that they topic is available and that they match.
+
+
+# Battery Check 
+- Battery is charged (Voltage>11.7).
+- Securely fastened to the drone.
+
+
+
+# Cables Check
+- No hanging cabled
+- No cables near the propeller
+- No exposed wires
+- All legs are placed and secured
+
+# R.C Check
+- Vehicle arms and disarms
+- Mode change is possible
+
+
+
+#
+
+
 ## Run MPC instructions
 
 - open 4 tabs in terminator
