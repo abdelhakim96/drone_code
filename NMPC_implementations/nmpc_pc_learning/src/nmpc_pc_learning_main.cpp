@@ -308,11 +308,12 @@ int main(int argc, char** argv)
             }
         }
 
-        while (ros::ok() && current_state_msg.mode == "OFFBOARD" && !control_stop)
+        while (ros::ok() && !control_stop)
         {
             if (online_ref_yaw)
             {
-                nmpc_struct.U_ref(2) = ref_yaw_rad;
+                //nmpc_struct.U_ref(2) = ref_yaw_rad;
+                nmpc_struct.U_ref(2) = 0;
             }
             t_cc_loop = ros::Time::now().toSec() - t;
             if (std::fmod(std::abs(t_cc_loop - (int)(t_cc_loop)), (double)(sampleTime)) == 0)
