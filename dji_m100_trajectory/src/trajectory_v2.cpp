@@ -9,6 +9,7 @@
 
 #include <trajectory_v2.h>
 #include <dji_m100_trajectory/set_trajectory_v2Config.h>
+std_msgs::Float64 px_test,py_test,nx_test,ny_test;
 
 double sampleTime = 0.01;
 
@@ -64,7 +65,9 @@ void dynamicReconfigureCallback(dji_m100_trajectory::set_trajectory_v2Config& co
 std::vector<double> current_pos, current_att(3, 0.0);
 geometry_msgs::PoseStamped desired_pos;
 geometry_msgs::PoseStamped point;
+geometry_msgs::PoseStamped point_delayed;
 geometry_msgs::PoseStamped normal;
+geometry_msgs::PoseStamped vel_d_g;
 void pos_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
     current_pos = {msg->pose.position.x, msg->pose.position.y, msg->pose.position.z};
@@ -79,9 +82,53 @@ void GP_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
     desired_pos = *msg;
 }
+
+
+void vel_point_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
+{
+   vel_d_g = *msg;
+
+}
+
+
 void point_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
     point = *msg;
+}
+
+
+
+void px_test_cb(const std_msgs::Float64::ConstPtr& msg)
+{
+    px_test = *msg;
+}
+
+
+void py_test_cb(const std_msgs::Float64::ConstPtr& msg)
+{
+    py_test = *msg;
+}
+
+
+void nx_test_cb(const std_msgs::Float64::ConstPtr& msg)
+{
+    nx_test = *msg;
+}
+
+void ny_test_cb(const std_msgs::Float64::ConstPtr& msg)
+{
+    ny_test = *msg;
+}
+
+
+
+
+
+
+
+void point_cb_delayed(const geometry_msgs::PoseStamped::ConstPtr& msg)
+{
+    point_delayed = *msg;
 }
 
 void norm_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
@@ -201,6 +248,8 @@ int main(int argc, char** argv)
     ros::Publisher lidar_read_filtered_pub = nh.advertise<std_msgs::Float64>("range_filter", 1);
     ros::Publisher drone_velocity_pub = nh.advertise<std_msgs::Float64>("drone_vel", 1);
     point_to_view_pub = nh.advertise<geometry_msgs::PoseStamped>("/point_to_view", 1);
+
+
     norm_desired_pub = nh.advertise<geometry_msgs::PoseStamped>("/surface_normal", 1);
 
     // Subscriber
@@ -209,9 +258,18 @@ int main(int argc, char** argv)
     Clidar_read_sub = nh.subscribe<sensor_msgs::Range>(Clidar_topic, 1, Clidar_read_cb);
     Rlidar_read_sub = nh.subscribe<sensor_msgs::Range>(Rlidar_topic, 1, Rlidar_read_cb);
     ros::Subscriber GP_WP_sub = nh.subscribe<geometry_msgs::PoseStamped>("/WP_GP", 1, GP_cb);
+    ros::Subscriber velocity_ref_sub = nh.subscribe<geometry_msgs::PoseStamped>("/point_vel_ref", 1, vel_point_cb);
+
     ros::Subscriber point_sub = nh.subscribe<geometry_msgs::PoseStamped>("/point_to_view_traj", 1, point_cb);
+    ros::Subscriber point_delayed_sub = nh.subscribe<geometry_msgs::PoseStamped>("/point_to_view_traj_delayed", 1, point_cb_delayed);
     ros::Subscriber norm_sub = nh.subscribe<geometry_msgs::PoseStamped>("/norm_traj", 1, norm_cb);
 
+
+   // test
+    ros::Subscriber px_test_sub = nh.subscribe<std_msgs::Float64>("px", 1, px_test_cb);
+    ros::Subscriber py_test_sub = nh.subscribe<std_msgs::Float64>("py", 1, py_test_cb);
+    ros::Subscriber nx_test_sub = nh.subscribe<std_msgs::Float64>("nx", 1, nx_test_cb);
+    ros::Subscriber ny_test_sub = nh.subscribe<std_msgs::Float64>("ny", 1, ny_test_cb);
     if (use_sonar)
         sonar_read_sub = nh.subscribe<sensor_msgs::Range>(sonar_topic, 1, sonar_read_cb);
 
@@ -294,11 +352,28 @@ int main(int argc, char** argv)
                                   ? z_delay_start
                                   : z_delay + climb_rate * sampleTime;
 
-                    u = (x - x_last) / sampleTime;
-                    v = (y - y_last) / sampleTime;
-                    w = (z - z_last) / sampleTime;
-
                     publish_inspection_point();
+                   // double u_global = ( point.pose.position.x -  point_delayed.pose.position.x) / sampleTime;
+                   // double v_global = (point.pose.position.y -  point_delayed.pose.position.y) / sampleTime;
+                   // double w_global = ( point.pose.position.z -  point_delayed.pose.position.z) / sampleTime;
+                    double u_global = vel_d_g.pose.position.x;
+                    double v_global = vel_d_g.pose.position.y;
+                    double w_global = vel_d_g.pose.position.z;
+
+
+                    // desired velocity data in body frame
+                    tf::Matrix3x3 rotational_matrix_BI(current_att_quat);
+                    rotational_matrix_BI = rotational_matrix_BI.transpose();
+
+                    u = rotational_matrix_BI[0][0] * u_global + rotational_matrix_BI[0][1] * v_global +
+                        rotational_matrix_BI[0][2] * w_global;
+                    v = rotational_matrix_BI[1][0] * u_global + rotational_matrix_BI[1][1] * v_global +
+                        rotational_matrix_BI[1][2] * w_global;
+                    w = rotational_matrix_BI[2][0] * u_global + rotational_matrix_BI[2][1] * v_global +
+                        rotational_matrix_BI[2][2] * w_global;
+
+
+                   
 
                     ref_yaw_msg.data = compute_ref_yaw();
                     if (!pub_setpoint_pos)
@@ -312,9 +387,15 @@ int main(int argc, char** argv)
                         reftrajectory_delay_msg.z = z_delay;
                         ref_pos_delay_pub.publish(reftrajectory_delay_msg);
 
-                        reftrajectory_vel_msg.x = std::abs(u) <= absvel ? u : (u < 0 ? -absvel : absvel);
-                        reftrajectory_vel_msg.y = std::abs(v) <= absvel ? v : (v < 0 ? -absvel : absvel);
-                        reftrajectory_vel_msg.z = std::abs(w) <= absvel ? w : (w < 0 ? -absvel : absvel);
+                        //reftrajectory_vel_msg.x = std::abs(u) <= absvel ? u : (u < 0 ? -absvel : absvel);
+                        //reftrajectory_vel_msg.y = std::abs(v) <= absvel ? v : (v < 0 ? -absvel : absvel);
+                        //reftrajectory_vel_msg.z = std::abs(w) <= absvel ? w : (w < 0 ? -absvel : absvel);
+
+                        
+
+
+
+
                         ref_vel_pub.publish(reftrajectory_vel_msg);
 
                         ref_yaw_pub.publish(ref_yaw_msg);
@@ -327,10 +408,10 @@ int main(int argc, char** argv)
                         setpoint_pos_msg.pose.position.z = z;
 
                         setpoint_att_quat.setRPY(0, 0, ref_yaw_msg.data);
-                        setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
-                        setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
-                        setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
-                        setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+                        setpoint_pos_msg.pose.orientation.x = desired_pos.pose.orientation.x;
+                        setpoint_pos_msg.pose.orientation.y = desired_pos.pose.orientation.y;
+                        setpoint_pos_msg.pose.orientation.z = desired_pos.pose.orientation.z;
+                        setpoint_pos_msg.pose.orientation.w = desired_pos.pose.orientation.w;
                         ref_pose_pub.publish(setpoint_pos_msg);
                     }
                     else
@@ -342,10 +423,10 @@ int main(int argc, char** argv)
                         setpoint_pos_msg.pose.position.z = z;
 
                         setpoint_att_quat.setRPY(0, 0, ref_yaw_msg.data);
-                        setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
-                        setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
-                        setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
-                        setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+                        setpoint_pos_msg.pose.orientation.x = desired_pos.pose.orientation.x;
+                        setpoint_pos_msg.pose.orientation.y = desired_pos.pose.orientation.y;
+                        setpoint_pos_msg.pose.orientation.z = desired_pos.pose.orientation.z;
+                        setpoint_pos_msg.pose.orientation.w = desired_pos.pose.orientation.w;
                         setpoint_pos_pub.publish(setpoint_pos_msg);
                         ref_pose_pub.publish(setpoint_pos_msg);
                     }
@@ -1028,6 +1109,8 @@ int main(int argc, char** argv)
                 x = desired_pos.pose.position.x;
                 y = desired_pos.pose.position.y;
                 z = desired_pos.pose.position.z;
+
+                
                 //x=0.0;
                 //y=0.0;
                 //z=2.0;
@@ -1159,12 +1242,12 @@ int main(int argc, char** argv)
                               ? z_delay_start
                               : z_delay - land_rate * sampleTime;
 
-                u = (x - x_last) / sampleTime;
-                v = (y - y_last) / sampleTime;
-                w = (z - z_last) / sampleTime;
-
-                publish_inspection_point();
-
+                //u = (x - x_last) / sampleTime;
+                //v = (y - y_last) / sampleTime;
+                //w = (z - z_last) / sampleTime;
+                
+                //publish_inspection_point();
+               
                 ref_yaw_msg.data = compute_ref_yaw();
                 if (!pub_setpoint_pos)
                 {
@@ -1177,12 +1260,16 @@ int main(int argc, char** argv)
                     reftrajectory_delay_msg.z = z_delay;
                     ref_pos_delay_pub.publish(reftrajectory_delay_msg);
 
-                    reftrajectory_vel_msg.x = std::abs(u) <= absvel ? u : (u < 0 ? -absvel : absvel);
-                    reftrajectory_vel_msg.y = std::abs(v) <= absvel ? v : (v < 0 ? -absvel : absvel);
-                    reftrajectory_vel_msg.z = std::abs(w) <= absvel ? w : (w < 0 ? -absvel : absvel);
-                    ref_vel_pub.publish(reftrajectory_vel_msg);
+                    //reftrajectory_vel_msg.x = std::abs(u) <= absvel ? u : (u < 0 ? -absvel : absvel);
+                    //reftrajectory_vel_msg.y = std::abs(v) <= absvel ? v : (v < 0 ? -absvel : absvel);
+                    //reftrajectory_vel_msg.z = std::abs(w) <= absvel ? w : (w < 0 ? -absvel : absvel);
 
-                    ref_yaw_pub.publish(ref_yaw_msg);
+
+
+
+                    //ref_vel_pub.publish(reftrajectory_vel_msg);
+
+                    //ref_yaw_pub.publish(ref_yaw_msg);
                     // For rviz visualization:
                     setpoint_pos_msg.header.stamp = ros::Time::now();
                     setpoint_pos_msg.header.frame_id = "map";
@@ -1191,10 +1278,10 @@ int main(int argc, char** argv)
                     setpoint_pos_msg.pose.position.z = z;
 
                     setpoint_att_quat.setRPY(0, 0, ref_yaw_msg.data);
-                    setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
-                    setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
-                    setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
-                    setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+                    setpoint_pos_msg.pose.orientation.x = desired_pos.pose.orientation.x;
+                    setpoint_pos_msg.pose.orientation.y = desired_pos.pose.orientation.x;
+                    setpoint_pos_msg.pose.orientation.z = desired_pos.pose.orientation.x;
+                    setpoint_pos_msg.pose.orientation.w = desired_pos.pose.orientation.x;;
                     ref_pose_pub.publish(setpoint_pos_msg);
                 }
                 else
@@ -1206,10 +1293,24 @@ int main(int argc, char** argv)
                     setpoint_pos_msg.pose.position.z = z;
 
                     setpoint_att_quat.setRPY(0, 0, ref_yaw_msg.data);
-                    setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
-                    setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
-                    setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
-                    setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+                    //setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
+                    //setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
+                    //setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
+                    //setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+
+
+ 
+
+                    setpoint_pos_msg.pose.orientation.x = desired_pos.pose.orientation.x;
+;
+                    setpoint_pos_msg.pose.orientation.y = desired_pos.pose.orientation.y;
+;
+                    setpoint_pos_msg.pose.orientation.z = desired_pos.pose.orientation.z;
+;
+                    setpoint_pos_msg.pose.orientation.w =desired_pos.pose.orientation.w;
+;
+
+
                     setpoint_pos_pub.publish(setpoint_pos_msg);
                     ref_pose_pub.publish(setpoint_pos_msg);
                 }
@@ -1237,10 +1338,16 @@ int main(int argc, char** argv)
                 rate.sleep();
             }
         }
+        publish_inspection_point();
+        //double u_global = (x - x_last) / sampleTime;
+        //double v_global = (y - y_last) / sampleTime;
+       // double w_global = (z - z_last) / sampleTime;
+        double u_global = vel_d_g.pose.position.x;
+        double v_global =  vel_d_g.pose.position.y;
+        double w_global =  vel_d_g.pose.position.z;
+        
+       
 
-        double u_global = (x - x_last) / sampleTime;
-        double v_global = (y - y_last) / sampleTime;
-        double w_global = (z - z_last) / sampleTime;
 
         // desired velocity data in body frame
         tf::Matrix3x3 rotational_matrix_BI(current_att_quat);
@@ -1253,6 +1360,10 @@ int main(int argc, char** argv)
         w = rotational_matrix_BI[2][0] * u_global + rotational_matrix_BI[2][1] * v_global +
             rotational_matrix_BI[2][2] * w_global;
 
+
+
+
+
         //        std::cout<<"absolute vel along x & y = "<<sqrt(u*u + v*v)<<"\n";
 
         x_last = x;
@@ -1263,9 +1374,21 @@ int main(int argc, char** argv)
         //        lidar_read_filtered_pub.publish(Clidar_read_filtered_msg);
         std_msgs::Float64 v_d_m;
         v_d_m.data = v_d;
-        drone_velocity_pub.publish(v_d_m);
+        //drone_velocity_pub.publish(v_d_m);
+
+
+
+
+
+
+        reftrajectory_vel_msg.x = u*v_d;
+        reftrajectory_vel_msg.y = v*v_d;
+        reftrajectory_vel_msg.z = w*v_d;
+        ref_vel_pub.publish(reftrajectory_vel_msg);
 
         publish_inspection_point();
+
+
 
         if (!pub_setpoint_pos)
         {
@@ -1278,10 +1401,10 @@ int main(int argc, char** argv)
             reftrajectory_delay_msg.z = z_delay;
             ref_pos_delay_pub.publish(reftrajectory_delay_msg);
 
-            reftrajectory_vel_msg.x = std::abs(u) <= absvel ? u : (u < 0 ? -absvel : absvel);
-            reftrajectory_vel_msg.y = std::abs(v) <= absvel ? v : (v < 0 ? -absvel : absvel);
-            reftrajectory_vel_msg.z = std::abs(w) <= absvel ? w : (w < 0 ? -absvel : absvel);
-            ref_vel_pub.publish(reftrajectory_vel_msg);
+            reftrajectory_vel_msg.x = u*v_d;
+            reftrajectory_vel_msg.y = v*v_d;
+            reftrajectory_vel_msg.z = w*v_d;
+            //ref_vel_pub.publish(reftrajectory_vel_msg);
 
             ref_yaw_pub.publish(ref_yaw_msg);
             // For rviz visualization:
@@ -1292,10 +1415,10 @@ int main(int argc, char** argv)
             setpoint_pos_msg.pose.position.z = z;
 
             setpoint_att_quat.setRPY(0, 0, ref_yaw_msg.data);
-            setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
-            setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
-            setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
-            setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+            setpoint_pos_msg.pose.orientation.x = desired_pos.pose.orientation.x;
+            setpoint_pos_msg.pose.orientation.y = desired_pos.pose.orientation.y;
+            setpoint_pos_msg.pose.orientation.z = desired_pos.pose.orientation.z;
+            setpoint_pos_msg.pose.orientation.w = desired_pos.pose.orientation.w;
             ref_pose_pub.publish(setpoint_pos_msg);
         }
         else
@@ -1307,10 +1430,12 @@ int main(int argc, char** argv)
             setpoint_pos_msg.pose.position.z = z;
 
             setpoint_att_quat.setRPY(0, 0, ref_yaw_msg.data);
-            setpoint_pos_msg.pose.orientation.x = setpoint_att_quat.getX();
-            setpoint_pos_msg.pose.orientation.y = setpoint_att_quat.getY();
-            setpoint_pos_msg.pose.orientation.z = setpoint_att_quat.getZ();
-            setpoint_pos_msg.pose.orientation.w = setpoint_att_quat.getW();
+            setpoint_pos_msg.pose.orientation.x = desired_pos.pose.orientation.x;
+            setpoint_pos_msg.pose.orientation.y = desired_pos.pose.orientation.y;
+            setpoint_pos_msg.pose.orientation.z = desired_pos.pose.orientation.z;
+
+            setpoint_pos_msg.pose.orientation.w = desired_pos.pose.orientation.w;
+
             setpoint_pos_pub.publish(setpoint_pos_msg);
             ref_pose_pub.publish(setpoint_pos_msg);
         }
@@ -1334,9 +1459,7 @@ void publish_inspection_point()
     ref_normal.header.frame_id = "map";
     if (point_tracking_on)
     {
-        //ref_point.pose.position.x = px;
-        //ref_point.pose.position.y = py;
-        //ref_point.pose.position.z = pz;
+
                     
                     float px_p = point.pose.position.x;
                     float py_p = point.pose.position.y;
@@ -1344,6 +1467,10 @@ void publish_inspection_point()
                     float nx = normal.pose.position.x;
                     float ny = normal.pose.position.y;
                     float nz = normal.pose.position.z;
+                    
+                    float px_p_delayed = point_delayed.pose.position.x;
+                    float py_p_delayed = point_delayed.pose.position.y;
+                    float pz_p_delayed = point_delayed.pose.position.z;
 
                     ref_normal.pose.position.x = nx;
                     ref_normal.pose.position.y = ny;
@@ -1353,14 +1480,31 @@ void publish_inspection_point()
                     ref_point.pose.position.y = py_p;
                     ref_point.pose.position.z = pz_p;
 
+                   //test 
+
+                    //ref_point.pose.position.x=px_test.data;
+                    //ref_point.pose.position.y=py_test.data;
+                    //ref_point.pose.position.z=z;
+                    //ref_normal.pose.position.x = nx_test.data;
+                    //ref_normal.pose.position.y = ny_test.data;
+                    //ref_normal.pose.position.z = 0;
+
+                   // ref_point.pose.position.x = px;
+                   // ref_point.pose.position.y = py;
+                   // ref_point.pose.position.z = pz;
+                    
     }
     else
     {
-        ref_point.pose.position.x = -8.0;
-        ref_point.pose.position.y = 0.0;
+        //ref_point.pose.position.x = -10.0;
+        //ref_point.pose.position.y = 1.1;
+        ref_point.pose.position.x = px;
+        ref_point.pose.position.y = py;
+
+
         ref_point.pose.position.z = z;
-        ref_normal.pose.position.x = 1.0;
-        ref_normal.pose.position.y = 0.0;
+        ref_normal.pose.position.x = nxx;
+        ref_normal.pose.position.y = nyy;
         ref_normal.pose.position.z = 0.0;
     }
 
