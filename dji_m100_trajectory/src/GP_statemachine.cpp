@@ -399,7 +399,7 @@ int main(int argc, char** argv)
 	double v_x,v_y,v_z;
 	double normx,normy,normz;
     //std::vector<int> myVector = {1, 2, 3, 4, 5, 6};
-        std::ifstream inputFile("/home/hakim/testing_ws/src/simulation/Plotting_data/wp_inter.txt");
+        std::ifstream inputFile("/home/kakao/hakim_ws/src/drone_code/Plotting_data/wp_inter.txt");
     //std::ifstream inputFile("/home/airlab/hakim_ws/src/WTI_catkin/dji_m100_trajectory/src/matlab_plots/Results/wp_inter.txt");
         //std::ifstream inputFile("/home/airlab/hakim_ws/src/WTI_catkin/dji_m100_trajectory/src/GP_output/interpolatedwps.txt");
 
