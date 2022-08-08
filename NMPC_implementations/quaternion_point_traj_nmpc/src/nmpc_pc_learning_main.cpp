@@ -407,8 +407,8 @@ int main(int argc, char** argv)
                               ref_att_quat.getZ(),
                               ref_att_quat.getW(),
                               1,
-                              0.5,
-                              -0.5,
+                              1.0,
+                              -1.0,
                               0.0
                               };
 

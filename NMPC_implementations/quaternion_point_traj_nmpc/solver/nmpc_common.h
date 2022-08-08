@@ -73,9 +73,9 @@ extern "C"
 /** Number of differential derivative variables. */
 #define NMPC_NXD 0
 /** Number of references/measurements per node on the first N nodes. */
-#define NMPC_NY 17
+#define NMPC_NY 18
 /** Number of references/measurements on the last (N + 1)st node. */
-#define NMPC_NYN 10
+#define NMPC_NYN 14
 /** Total number of QP optimization variables. */
 #define NMPC_QP_NV 136
 /** Number of integration steps per shooting interval. */
@@ -119,23 +119,23 @@ real_t u[ 120 ];
  */
 real_t od[ 279 ];
 
-/** Column vector of size: 510
+/** Column vector of size: 540
  * 
- *  Matrix containing 30 reference/measurement vectors of size 17 for first 30 nodes.
+ *  Matrix containing 30 reference/measurement vectors of size 18 for first 30 nodes.
  */
-real_t y[ 510 ];
+real_t y[ 540 ];
 
-/** Column vector of size: 10
+/** Column vector of size: 14
  * 
  *  Reference/measurement vector for the 31. node.
  */
-real_t yN[ 10 ];
+real_t yN[ 14 ];
 
-/** Matrix of size: 17 x 17 (row major format) */
-real_t W[ 289 ];
+/** Matrix of size: 18 x 18 (row major format) */
+real_t W[ 324 ];
 
-/** Matrix of size: 10 x 10 (row major format) */
-real_t WN[ 100 ];
+/** Matrix of size: 14 x 14 (row major format) */
+real_t WN[ 196 ];
 
 /** Column vector of size: 16
  * 
@@ -168,11 +168,11 @@ real_t state[ 349 ];
 /** Column vector of size: 480 */
 real_t d[ 480 ];
 
-/** Column vector of size: 510 */
-real_t Dy[ 510 ];
+/** Column vector of size: 540 */
+real_t Dy[ 540 ];
 
-/** Column vector of size: 10 */
-real_t DyN[ 10 ];
+/** Column vector of size: 14 */
+real_t DyN[ 14 ];
 
 /** Matrix of size: 480 x 16 (row major format) */
 real_t evGx[ 7680 ];
@@ -180,32 +180,32 @@ real_t evGx[ 7680 ];
 /** Matrix of size: 480 x 4 (row major format) */
 real_t evGu[ 1920 ];
 
-/** Column vector of size: 80 */
-real_t objAuxVar[ 80 ];
+/** Column vector of size: 111 */
+real_t objAuxVar[ 111 ];
 
 /** Row vector of size: 29 */
 real_t objValueIn[ 29 ];
 
-/** Row vector of size: 357 */
-real_t objValueOut[ 357 ];
+/** Row vector of size: 378 */
+real_t objValueOut[ 378 ];
 
 /** Matrix of size: 480 x 16 (row major format) */
 real_t Q1[ 7680 ];
 
-/** Matrix of size: 480 x 17 (row major format) */
-real_t Q2[ 8160 ];
+/** Matrix of size: 480 x 18 (row major format) */
+real_t Q2[ 8640 ];
 
 /** Matrix of size: 120 x 4 (row major format) */
 real_t R1[ 480 ];
 
-/** Matrix of size: 120 x 17 (row major format) */
-real_t R2[ 2040 ];
+/** Matrix of size: 120 x 18 (row major format) */
+real_t R2[ 2160 ];
 
 /** Matrix of size: 16 x 16 (row major format) */
 real_t QN1[ 256 ];
 
-/** Matrix of size: 16 x 10 (row major format) */
-real_t QN2[ 160 ];
+/** Matrix of size: 16 x 14 (row major format) */
+real_t QN2[ 224 ];
 
 /** Column vector of size: 16 */
 real_t Dx0[ 16 ];
