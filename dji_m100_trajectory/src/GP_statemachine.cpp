@@ -453,7 +453,7 @@ int main(int argc, char** argv)
         //std::ifstream inputFileny("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_y.txt");
         //std::ifstream inputFilenz("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_z.txt");
     std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nx_inter.txt");
-        std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_codeResults/Data/normals/ny_inter.txt");
+        std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/ny_inter.txt");
         std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nz_inter.txt");
     std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
         std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
