@@ -455,9 +455,12 @@ int main(int argc, char** argv)
     std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nx_inter.txt");
         std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/ny_inter.txt");
         std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nz_inter.txt");
-    std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
-        std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
-        std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vz_inter.txt");
+   // std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
+    //    std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
+     //   std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vz_inter.txt");
+    std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vx_inter.txt");
+      std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vy_inter.txt");
+    std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vz_inter.txt");
     
 	
 	//vecX.push_back((wp_x+80.0)/scaling);
