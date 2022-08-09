@@ -1,7 +1,7 @@
 #include <ros/ros.h>
-//#include <image_transport/image_transport.h>
-//#include <opencv2/highgui/highgui.hpp>
-//#include <cv_bridge/cv_bridge.h>
+#include <image_transport/image_transport.h>
+#include <opencv2/highgui/highgui.hpp>
+#include <cv_bridge/cv_bridge.h>
 //#include <airsim_ros_wrapper.h>
 #include <fstream>
 #include <iostream>
@@ -10,10 +10,10 @@
 #include <ros/spinner.h>
 #include "std_msgs/Float64.h"
 #include <ros/ros.h>
-//#include <image_transport/image_transport.h>
-//#include <cv_bridge/cv_bridge.h>
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
-//#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PointStamped.h>
 //#include <mavros_msgs/CommandBool.h>
@@ -31,6 +31,7 @@
 #include <ros/duration.h>
 #include <iostream>
 #include <string>
+#include <std_msgs/Bool.h>
 //#include <mavros_msgs/CommandTOL.h>
 //#include <mavros_msgs/CommandLong.h>
 //#include <mavros_msgs/State.h>
@@ -54,7 +55,7 @@ ros::Publisher s4_pub;
 
 
 
-
+ros::Subscriber inspection_start_sub;
 ros::Subscriber currentPos;
 ros::Subscriber state_sub;
 ros::Subscriber dronevelocity_sub;
@@ -79,7 +80,8 @@ geometry_msgs::PoseStamped norm_g;
 geometry_msgs::PoseStamped vel;
 geometry_msgs::TwistStamped move;
 std_msgs::Float64 dist_t;
-
+//std_msgs::Bool inspection_start_msg;
+bool inspection_start_msg = false;
 std_msgs::Float64 s1_t;
 std_msgs::Float64 s2_t;
 std_msgs::Float64 s3_t;
@@ -295,7 +297,14 @@ void point_vel_cb(float vx, float vy, float vz)
 }
 
 
+void inspection_start_cb(const std_msgs::Bool::ConstPtr& msg)
+{
 
+	
+
+   inspection_start_msg=msg->data;;
+	
+}
 
 
 
@@ -366,7 +375,9 @@ int init_publisher_subscriber(ros::NodeHandle controlnode)
 	
 
 	currentPos = controlnode.subscribe<geometry_msgs::PoseStamped>((ros_namespace + "/mavros/mocap/pose").c_str(), 10, pose_cb); 
+	inspection_start_sub = controlnode.subscribe<std_msgs::Bool>((ros_namespace + "/inspection_start").c_str(), 10, inspection_start_cb); 
 	dronevelocity_sub = controlnode.subscribe<std_msgs::Float64>((ros_namespace + "/drone_vel").c_str(), 10, drone_v_cb); 
+
 	return 0;
 }
 
@@ -442,26 +453,32 @@ int main(int argc, char** argv)
         //std::ifstream inputFileny("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_y.txt");
         //std::ifstream inputFilenz("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_z.txt");
     std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nx_inter.txt");
-        std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/ny_inter.txt");
+        std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_codeResults/Data/normals/ny_inter.txt");
         std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nz_inter.txt");
     std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
-        std::ifstream inputFilevy("/home/hakim/testing_ws/src/simulation/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
-        std::ifstream inputFilevz("/home/hakim/testing_ws/src/simulation/dji_m100_trajectory/src/matlab_plots/Results/vz_inter.txt");
-
+        std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
+        std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vz_inter.txt");
+    
+	
+	//vecX.push_back((wp_x+80.0)/scaling);
+    //vecY.push_back(wp_y/scaling);
+    //vecZ.push_back((wp_z-60.0)/scaling_z);
+	//vec1.push_back(y1);
 
 //cheat_d5cm_interp_x.txt
     while (inputFilex >> p_x )
     {
-	vx.push_back((p_x)+68);
+	vx.push_back(((p_x)+80.0)/scaling);
+	
     }
 	while (inputFiley >> p_y  )
     {
-	vy.push_back((p_y)-32);
+	vy.push_back((p_y)/scaling);
     }
 
 	while (inputFilez >> p_z )
     {
-	vz.push_back((p_z)-70);
+	vz.push_back(((p_z)-60.0)/scaling_z);
     }
 
     while (inputFilevx >> v_x )
@@ -503,6 +520,7 @@ int main(int argc, char** argv)
 	pointm.y =  vy[i];
 	pointm.z = vz[i];
 	pointList.push_back(pointm);
+	
 	}
 
 
@@ -525,7 +543,7 @@ int main(int argc, char** argv)
 
 
 
-	ros::Rate rate(8);
+	ros::Rate rate(16);
     
 	ros::Time last_request = ros::Time::now();
 
@@ -581,8 +599,8 @@ int main(int argc, char** argv)
 	    ros::spinOnce();
 		rate.sleep();
 
-
-    
+        
+        
 		axx=current_pose_g.pose.position.x - pointList[n].x;
         ayy=current_pose_g.pose.position.y - pointList[n].y;
 	    azz=current_pose_g.pose.position.z - pointList[n].z;
@@ -611,6 +629,9 @@ int main(int argc, char** argv)
         
 
 		//	if ((abs(normList[n+1].x-normList[n].x)>0.000001) || (counter < 10) || (abs(pointList[n+1].x-pointList[n].x)>0.045) || (abs(pointList[n+1].y-pointList[n].y)>0.045) ||  (abs(normList[n+1].x-normList[n-30].x)>0.000001)  ||    normList[n+1].z>0.0 )
+
+
+
 
 	if ((abs(normList[n+1].x-normList[n].x)>0.000001) || ((vel_abs2-vel_abs1)>0.001)  ||  jump==1 || (abs(velList[n].y)+abs(velList[n].x)>0.75) ||  (abs(normList[n+1].z-normList[n].z)>0.001) || (abs(velList[n].y)+abs(velList[n].x)+abs(velList[n].z)>1.70) || (abs(velList[n].z)>1.500))
 {
@@ -681,7 +702,13 @@ counter=counter+3;
  // ct=n;
 			if (counter < waypointList.size()-1)
 			{   
-				
+				if (!inspection_start_msg)
+				{
+
+					counter=1;
+				}
+
+               
                 
 			  	set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
                 //set_heading(waypointList[n].psi);
@@ -794,20 +821,22 @@ counter=counter+3;
 				ROS_INFO("z %f", waypointList[n].z);
 				ROS_INFO("px %f", pointList[n].x);
 				ROS_INFO("py %f", pointList[n].y);
-                ROS_INFO("px -1 %f", pointList[n-1].x);
-				ROS_INFO("py -1 %f", pointList[n-1].y);
- 
+                //ROS_INFO("px -1 %f", pointList[n-1].x);
+				//ROS_INFO("py -1 %f", pointList[n-1].y);
+                ROS_INFO("pz %f", pointList[n].z);
 
-				ROS_INFO("counter %d", n);
-				ROS_INFO(" ct %d", ct);
-                ROS_INFO(" v_turnx %f",  v_turnx);
-                ROS_INFO(" v_turny %f",  v_turny);
+				//ROS_INFO("counter %d", n);
+				//ROS_INFO(" ct %d", ct);
+                //ROS_INFO(" v_turnx %f",  v_turnx);
+                //ROS_INFO(" v_turny %f",  v_turny);
                 ROS_INFO(" nx %f",  normList[n].x);
                 ROS_INFO(" ny %f",  normList[n].y);
-				ROS_INFO(" theta %f",  thetaa*(180/3.142));
-				ROS_INFO(" dist %f",  dist);
-	            ROS_INFO("Z  %f", waypointList[n].z);
-			    ROS_INFO("pz  %f", pointList[n].z);
+
+				ROS_INFO(" inspection_start_msg %f",  inspection_start_msg);
+				//ROS_INFO(" theta %f",  thetaa*(180/3.142));
+				//ROS_INFO(" dist %f",  dist);
+	           // ROS_INFO("Z  %f", waypointList[n].z);
+			    //ROS_INFO("pz  %f", pointList[n].z);
 			}
 
 			//else{
