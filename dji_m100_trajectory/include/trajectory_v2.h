@@ -43,6 +43,7 @@ ros::Publisher traj_on_pub;
 ros::Publisher reg_on_pub;
 ros::Publisher point_to_view_pub;
 ros::Publisher norm_desired_pub;
+ros::Publisher inspection_start_pub;
 
 // Subscriber
 ros::Subscriber pos_sub;
@@ -53,7 +54,7 @@ double max_z, x_hover, y_hover, z_hover, yaw_hover, wall_dist, x_sp_start, y_sp_
     climb_rate, land_rate;
 int pos_pub_delay, traj_type, camera_V_FOV, req_V_overlap_percent, num_turns, sp_z_counter, const_z;
 bool traj_on, max_z_on, lidar_on, adaptive_yaw_on, reg_on, climb_flag, land_flag, change_z, point_tracking_on,
-    pub_setpoint_pos, use_current_pos;
+    pub_setpoint_pos, use_current_pos, inspection_start;
 bool sp_z_counter_switch, sp_left_corner_reached_flag, sp_right_corner_reached_flag;
 
 geometry_msgs::PoseStamped pos_ref_start_msg;
@@ -62,7 +63,7 @@ std_msgs::Float64 ref_yaw_msg;
 geometry_msgs::PoseStamped setpoint_pos_msg;
 tf::Quaternion current_att_quat, setpoint_att_quat;
 tf::Matrix3x3 current_att_mat, R_BI, R_IB;
-std_msgs::Bool traj_on_msg, reg_on_msg;
+std_msgs::Bool traj_on_msg, reg_on_msg, inspection_start_msg;
 
 bool use_sonar;
 double Llidar_read_data, Clidar_read_data, Rlidar_read_data, sonar_read_data, ref_yaw_adaptive = 0.0;

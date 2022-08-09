@@ -16,6 +16,7 @@ double sampleTime = 0.01;
 void dynamicReconfigureCallback(dji_m100_trajectory::set_trajectory_v2Config& config, uint32_t level)
 {
     traj_on = config.traj_on;
+    inspection_start = config.inspection_start;
     max_z_on = config.max_z_on;
     lidar_on = config.lidar_on;
     adaptive_yaw_on = config.adaptive_yaw_on;
@@ -243,6 +244,7 @@ int main(int argc, char** argv)
     ref_yaw_pub = nh.advertise<std_msgs::Float64>("ref_trajectory/yaw", 1);
     setpoint_pos_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_position/local", 1);
     traj_on_pub = nh.advertise<std_msgs::Bool>("trajectory_on", 1);
+    inspection_start_pub = nh.advertise<std_msgs::Bool>("inspection_start", 1);
     reg_on_pub = nh.advertise<std_msgs::Bool>("regression_on", 1);
 
     ros::Publisher lidar_read_filtered_pub = nh.advertise<std_msgs::Float64>("range_filter", 1);
@@ -287,6 +289,8 @@ int main(int argc, char** argv)
     while (ros::ok())
     {
         traj_on_msg.data = traj_on;
+        inspection_start_msg.data = inspection_start;
+        inspection_start_pub.publish(inspection_start_msg);
         reg_on_msg.data = traj_on ? reg_on : false;
 
         if (max_z_on && pos_ref_start_msg.pose.position.z != max_z && !landed_flag && traj_on != 1)
@@ -1500,9 +1504,11 @@ void publish_inspection_point()
         //ref_point.pose.position.y = 1.1;
         ref_point.pose.position.x = px;
         ref_point.pose.position.y = py;
+        
 
 
-        ref_point.pose.position.z = z;
+        //ref_point.pose.position.z =  current_pos[0];
+        ref_point.pose.position.z =  z;
         ref_normal.pose.position.x = nxx;
         ref_normal.pose.position.y = nyy;
         ref_normal.pose.position.z = 0.0;

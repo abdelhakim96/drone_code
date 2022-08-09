@@ -435,16 +435,16 @@ int main(int argc, char** argv)
    
     std::vector<double> meshX1, meshX2,meshX3, meshY1, meshY2,meshY3,meshZ1, meshZ2,meshZ3,vx,vy,vz,vnx, vny,vnz, vel_x,vel_y, vel_z;
     
-    std::ifstream inputFilex("/home/hakim/testing_ws/src/simulation/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_x.txt");  //meshfile
-    std::ifstream inputFiley("/home/hakim/testing_ws/src/simulation/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_y.txt");  //meshfile
-        std::ifstream inputFilez("/home/hakim/testing_ws/src/simulation/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_z.txt");
+    std::ifstream inputFilex("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_x.txt");  //meshfile
+    std::ifstream inputFiley("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_y.txt");  //meshfile
+        std::ifstream inputFilez("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_z.txt");
         //std::ifstream inputFilenx("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_x.txt");
         //std::ifstream inputFileny("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_y.txt");
         //std::ifstream inputFilenz("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_z.txt");
-    std::ifstream inputFilenx("/home/hakim/testing_ws/src/simulation/Results/Data/normals/nx_inter.txt");
-        std::ifstream inputFileny("/home/hakim/testing_ws/src/simulation/Results/Data/normals/ny_inter.txt");
-        std::ifstream inputFilenz("/home/hakim/testing_ws/src/simulation/Results/Data/normals/nz_inter.txt");
-    std::ifstream inputFilevx("/home/hakim/testing_ws/src/simulation/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
+    std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nx_inter.txt");
+        std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/ny_inter.txt");
+        std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nz_inter.txt");
+    std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
         std::ifstream inputFilevy("/home/hakim/testing_ws/src/simulation/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
         std::ifstream inputFilevz("/home/hakim/testing_ws/src/simulation/dji_m100_trajectory/src/matlab_plots/Results/vz_inter.txt");
 
