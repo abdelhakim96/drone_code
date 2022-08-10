@@ -596,7 +596,7 @@ int main(int argc, char** argv)
 	float vel_abs2;
 	float vel_abs3;
 
-
+   
 	while(ros::ok())
 	{   
 	    ros::spinOnce();
@@ -631,73 +631,8 @@ int main(int argc, char** argv)
 	    adn=(axx * ncx + ayy * ncy)/(sqrt(axx * axx + ayy*ayy));
         
 
-		//	if ((abs(normList[n+1].x-normList[n].x)>0.000001) || (counter < 10) || (abs(pointList[n+1].x-pointList[n].x)>0.045) || (abs(pointList[n+1].y-pointList[n].y)>0.045) ||  (abs(normList[n+1].x-normList[n-30].x)>0.000001)  ||    normList[n+1].z>0.0 )
 
 
-
-
-	if ((abs(normList[n+1].x-normList[n].x)>0.000001) || ((vel_abs2-vel_abs1)>0.001)  ||  jump==1 || (abs(velList[n].y)+abs(velList[n].x)>0.75) ||  (abs(normList[n+1].z-normList[n].z)>0.001) || (abs(velList[n].y)+abs(velList[n].x)+abs(velList[n].z)>1.70) || (abs(velList[n].z)>1.500))
-{
-	 jump=1;
-       if  ((vel_abs3-vel_abs1)<0.01 && (vel_abs2-vel_abs1)<0.01  && (vel_abs3-vel_abs2)<0.01   )
-	   {
-           jump=0;
-	   }           
-         cc=cc+1;
-        
-
-     if (normList[n+1].z>0.5)
-      {
-
-        counter=counter+5;
-		 n=counter+1;
-         cc=0;
-	  }
-
-else{
-
-
-
-        counter=counter+2;
-		 n=counter+1;
-         cc=0;
-
-}
-
-
-}
-else 
-
-
-{
- if  (n>100)	
- { if ((abs(normList[n].x-normList[n-20].x))>0.0001   ||   (abs(normList[n].z-normList[n-20].z)>0.0001	)	)
-			//
-			{
-			counter=counter+3;
-		    n=counter+1;
-			cc=0;
-			}
-     else
-{
-counter=counter+10;
-		    n=counter+1;
-			cc=0;
-}           
-
-}
-
-
-else{
-counter=counter+3;
-		    n=counter+1;
-			cc=0;
-
-
-}
-
-
-}
 
             int skip = 5;
 
@@ -705,8 +640,9 @@ counter=counter+3;
  // ct=n;
 			if (counter < waypointList.size()-10)
 			{   
-
-				counter= counter * skip;
+                  
+				n = counter * skip;
+				counter=counter+1;
 				if (!inspection_start_msg)
 				{
                     counter=2;
