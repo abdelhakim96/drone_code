@@ -559,7 +559,7 @@ int main(int argc, char** argv)
     //set_point(tx,ty,current_pose_g.pose.pose.position.z);
     int counter = 1;
 	set_destination(waypointList[1].x,waypointList[1].y,waypointList[1].z, waypointList[1].psi);
-	set_point(-80.0,0.0,current_pose_g.pose.position.z,-80.0,0.0,current_pose_g.pose.position.z);
+	//set_point(-80.0,0.0,current_pose_g.pose.position.z,-80.0,0.0,current_pose_g.pose.position.z);
 
 	set_norm(1.0,0.0,0.0);
 	//int v_d=1;
@@ -703,12 +703,13 @@ counter=counter+3;
 
 
  // ct=n;
-			if (counter < waypointList.size()-1)
+			if (counter < waypointList.size()-10)
 			{   
 				if (!inspection_start_msg)
 				{
-
-					counter=1;
+                    counter=2;
+					n=2;
+					
 				}
 
                
