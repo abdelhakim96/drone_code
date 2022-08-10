@@ -1476,13 +1476,13 @@ void publish_inspection_point()
                     float py_p_delayed = point_delayed.pose.position.y;
                     float pz_p_delayed = point_delayed.pose.position.z;
 
-                   // ref_normal.pose.position.x = nx;
-                   // ref_normal.pose.position.y = ny;
-                   // ref_normal.pose.position.z = 0;
+                    ref_normal.pose.position.x = nx;
+                    ref_normal.pose.position.y = ny;
+                    ref_normal.pose.position.z = 0;
 
-                   ref_point.pose.position.x = px_p;
-                   ref_point.pose.position.y = py_p;
-                   ref_point.pose.position.z = pz_p;
+                    ref_point.pose.position.x = px_p;
+                    ref_point.pose.position.y = py_p;
+                    ref_point.pose.position.z = pz_p;
 
                    //test 
 
