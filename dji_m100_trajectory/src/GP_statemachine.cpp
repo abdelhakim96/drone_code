@@ -834,7 +834,7 @@ counter=counter+3;
 				//ROS_INFO("py -1 %f", pointList[n-1].y);
                 ROS_INFO("pz %f", pointList[n].z);
 
-				//ROS_INFO("counter %d", n);
+				ROS_INFO("counter %d", n);
 				//ROS_INFO(" ct %d", ct);
                 //ROS_INFO(" v_turnx %f",  v_turnx);
                 //ROS_INFO(" v_turny %f",  v_turny);
