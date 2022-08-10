@@ -699,7 +699,7 @@ counter=counter+3;
 
 }
 
-
+            int skip = 5;
 
 
  // ct=n;
@@ -713,7 +713,7 @@ counter=counter+3;
 					n=2;
 					
 				}
-               int skip = 5;
+               
                
                 
 			  	set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
