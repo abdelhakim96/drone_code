@@ -634,7 +634,7 @@ int main(int argc, char** argv)
 
 
 
-            int skip = 5;
+            int skip = 2;
 
 
  // ct=n;
