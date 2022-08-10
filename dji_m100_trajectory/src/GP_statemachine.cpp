@@ -705,6 +705,8 @@ counter=counter+3;
  // ct=n;
 			if (counter < waypointList.size()-10)
 			{   
+
+				counter= counter * skip;
 				if (!inspection_start_msg)
 				{
                     counter=2;
@@ -712,7 +714,7 @@ counter=counter+3;
 					
 				}
                int skip = 5;
-               counter= counter * skip;
+               
                 
 			  	set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
                 //set_heading(waypointList[n].psi);
