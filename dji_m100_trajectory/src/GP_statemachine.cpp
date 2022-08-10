@@ -825,6 +825,9 @@ counter=counter+3;
 				ROS_INFO("z %f", waypointList[n].z);
 				ROS_INFO("px %f", pointList[n].x);
 				ROS_INFO("py %f", pointList[n].y);
+
+
+				set_point(pointList[n].x, pointList[n].y, pointList[n].z, pointList[n].x, pointList[n].x, pointList[n].x)
                 //ROS_INFO("px -1 %f", pointList[n-1].x);
 				//ROS_INFO("py -1 %f", pointList[n-1].y);
                 ROS_INFO("pz %f", pointList[n].z);
