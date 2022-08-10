@@ -711,8 +711,8 @@ counter=counter+3;
 					n=2;
 					
 				}
-
-               
+               int skip = 5;
+               counter= counter * skip;
                 
 			  	set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
                 //set_heading(waypointList[n].psi);
