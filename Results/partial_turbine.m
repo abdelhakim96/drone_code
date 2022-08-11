@@ -4,8 +4,8 @@ turbine_z=dlmread('Data/Point_to_View_Trajectory/mp_d1cm_interp_z.txt');
 
 
 turbine_nx=dlmread('Data/normals/nx_inter.txt');
-turbine_ny=dlmread('Data/normals/nx_inter.txt');
-turbine_nz=dlmread('Data/normals/nx_inter.txt');
+turbine_ny=dlmread('Data/normals/ny_inter.txt');
+turbine_nz=dlmread('Data/normals/nz_inter.txt');
 
 
 
@@ -14,7 +14,7 @@ turbine_x=turbine_x+80;
 turbine_z=turbine_z-74;
 
 length(turbine_z)
-point=28600;
+point=28700;
 
 plot3(turbine_x(point:end),turbine_y(point:end),turbine_z(point:end))
 
@@ -35,14 +35,14 @@ blade_nz=turbine_nz(point:end);
 
 
 
-writematrix(blade_x, "blade_x.txt");
-writematrix(blade_y, "blade_y.txt");
-writematrix(blade_z, "blade_z.txt");
+writematrix(blade_x, "blade_x_t.txt");
+writematrix(blade_y, "blade_y_t.txt");
+writematrix(blade_z, "blade_z_t.txt");
 
 
-writematrix(blade_nx, "blade_nx.txt");
-writematrix(blade_ny, "blade_ny.txt");
-writematrix(blade_nz, "blade_nz.txt");
+writematrix(blade_nx, "blade_nx_t.txt");
+writematrix(blade_ny, "blade_ny_t.txt");
+writematrix(blade_nz, "blade_nz_t.txt");
 
 
 
