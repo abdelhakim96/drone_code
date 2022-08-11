@@ -15,7 +15,7 @@ turbine_nz=dlmread('Data/normals/nz_inter.txt');
 
 turbine_y=turbine_y+22;
 turbine_x=turbine_x+80;
-turbine_z=turbine_z-74;
+turbine_z=turbine_z-72;
 
 length(turbine_z)
 point=28800;
@@ -26,7 +26,7 @@ plot3(turbine_x(point:end),turbine_y(point:end),turbine_z(point:end))
 
 
 scaling_xy=5;
-scaling_z=15;
+scaling_z=12;
 
 
 
