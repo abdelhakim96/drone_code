@@ -469,7 +469,9 @@ int main(int argc, char** argv)
     std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/blade_ny.txt");
     std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/blade_nz.txt");
 
-
+   std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vx_inter.txt");
+      std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vy_inter.txt");
+   std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vz_inter.txt");
 
 
 
