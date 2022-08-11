@@ -9,6 +9,10 @@ turbine_nz=dlmread('Data/normals/nz_inter.txt');
 
 
 
+
+
+
+
 turbine_y=turbine_y+22;
 turbine_x=turbine_x+80;
 turbine_z=turbine_z-74;
@@ -22,7 +26,14 @@ plot3(turbine_x(point:end),turbine_y(point:end),turbine_z(point:end))
 
 
 scaling_xy=5;
-scaling_z=10;
+scaling_z=15;
+
+
+
+
+
+
+
 
 blade_x=turbine_y(point:end)/scaling_xy;
 blade_y=turbine_x(point:end)/scaling_xy;
@@ -34,6 +45,22 @@ blade_ny=turbine_nx(point:end);
 blade_nz=turbine_nz(point:end);
 
 
+
+
+
+
+add_x=[0:0.01:2];
+add_x(:)=blade_x(1);
+add_y=[0:0.01:2];
+add_x(:)=blade_y(1);
+
+
+add_z=[0:0.01:2];
+
+
+add_nx=[0:0.01:2];
+add_ny=[0:0.01:2];
+add_nz=[0:0.01:2];
 
 writematrix(blade_x, "blade_x_t.txt");
 writematrix(blade_y, "blade_y_t.txt");
