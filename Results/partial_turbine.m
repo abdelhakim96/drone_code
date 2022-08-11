@@ -62,14 +62,14 @@ add_nx=[0:0.01:2];
 add_ny=[0:0.01:2];
 add_nz=[0:0.01:2];
 
-writematrix(blade_x, "blade_x_t.txt");
-writematrix(blade_y, "blade_y_t.txt");
-writematrix(blade_z, "blade_z_t.txt");
+writematrix(blade_x, "blade_x.txt");
+writematrix(blade_y, "blade_y.txt");
+writematrix(blade_z, "blade_z.txt");
 
 
-writematrix(blade_nx, "blade_nx_t.txt");
-writematrix(blade_ny, "blade_ny_t.txt");
-writematrix(blade_nz, "blade_nz_t.txt");
+writematrix(blade_nx, "blade_nx.txt");
+writematrix(blade_ny, "blade_ny.txt");
+writematrix(blade_nz, "blade_nz.txt");
 
 
 
