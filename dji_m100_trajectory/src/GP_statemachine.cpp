@@ -446,42 +446,49 @@ int main(int argc, char** argv)
    
     std::vector<double> meshX1, meshX2,meshX3, meshY1, meshY2,meshY3,meshZ1, meshZ2,meshZ3,vx,vy,vz,vnx, vny,vnz, vel_x,vel_y, vel_z;
     
-    std::ifstream inputFilex("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_x.txt");  //meshfile
-    std::ifstream inputFiley("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_y.txt");  //meshfile
-        std::ifstream inputFilez("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_z.txt");
-        //std::ifstream inputFilenx("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_x.txt");
-        //std::ifstream inputFileny("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_y.txt");
-        //std::ifstream inputFilenz("/home/airlab/hakim_ws/src/WTI_catkin/Results/Data/normals/mp_d1cm_interp_n_z.txt");
-    std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nx_inter.txt");
-        std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/ny_inter.txt");
-        std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nz_inter.txt");
-   // std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vx_inter.txt");
-    //    std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vy_inter.txt");
-     //   std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/dji_m100_trajectory/src/matlab_plots/Results/vz_inter.txt");
-    std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vx_inter.txt");
-      std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vy_inter.txt");
-    std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vz_inter.txt");
-    
-	
-	//vecX.push_back((wp_x+80.0)/scaling);
-    //vecY.push_back(wp_y/scaling);
-    //vecZ.push_back((wp_z-60.0)/scaling_z);
-	//vec1.push_back(y1);
+  //  std::ifstream inputFilex("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_x.txt");  //meshfile
+   // std::ifstream inputFiley("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_y.txt");  //meshfile
+    //    std::ifstream inputFilez("/home/kakao/hakim_ws/src/drone_code/Results/Data/Point_to_View_Trajectory/mp_d1cm_interp_z.txt");
 
-//cheat_d5cm_interp_x.txt
+    //std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nx_inter.txt");
+    //    std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/ny_inter.txt");
+     //   std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/Data/normals/nz_inter.txt");
+
+
+
+   // std::ifstream inputFilevx("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vx_inter.txt");
+   //   std::ifstream inputFilevy("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vy_inter.txt");
+  //  std::ifstream inputFilevz("/home/kakao/hakim_ws/src/drone_code/Plotting_data/vz_inter.txt");
+    
+
+    std::ifstream inputFilex("/home/kakao/hakim_ws/src/drone_code/Results/blade_x.txt");  //meshfile
+    std::ifstream inputFiley("/home/kakao/hakim_ws/src/drone_code/Results/blade_y.txt");  //meshfile
+    std::ifstream inputFilez("/home/kakao/hakim_ws/src/drone_code/Results/blade_z.txt");
+
+    std::ifstream inputFilenx("/home/kakao/hakim_ws/src/drone_code/Results/blade_nx.txt");
+    std::ifstream inputFileny("/home/kakao/hakim_ws/src/drone_code/Results/blade_ny.txt");
+    std::ifstream inputFilenz("/home/kakao/hakim_ws/src/drone_code/Results/blade_nz.txt");
+
+
+
+
+
+
+
+
     while (inputFilex >> p_x )
     {
-	vx.push_back(((p_x)+80.0)/scaling);
-	
+	//vx.push_back(((p_x)+80.0)/scaling);
+	vx.push_back(p_x);
     }
 	while (inputFiley >> p_y  )
     {
-	vy.push_back((p_y)/scaling);
+	vy.push_back(p_y);
     }
 
 	while (inputFilez >> p_z )
     {
-	vz.push_back(((p_z)-60.0)/scaling_z);
+	vz.push_back(p_z);
     }
 
     while (inputFilevx >> v_x )
