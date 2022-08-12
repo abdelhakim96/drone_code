@@ -647,7 +647,7 @@ int main(int argc, char** argv)
 
 
  // ct=n;
-			if (counter < waypointList.size()-40)
+			if (counter < pointList.size()-40)
 			{   
                   
 				n = counter * skip;
@@ -793,7 +793,7 @@ int main(int argc, char** argv)
                      n= waypointList.size()-40;
                      counter= waypointList.size()-40;
 			}        
-        
+              
                  
 				set_point(pointList[n].x,pointList[n].y,pointList[n].z, pointList[n-1].x,pointList[n-1].y,pointList[n-1].z);
                 
