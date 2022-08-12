@@ -410,7 +410,7 @@ int main(int argc, char** argv)
 	double v_x,v_y,v_z;
 	double normx,normy,normz;
     //std::vector<int> myVector = {1, 2, 3, 4, 5, 6};
-        std::ifstream inputFile("/home/kakao/hakim_ws/src/drone_code/Plotting_data/wp_inter.txt");
+        std::ifstream inputFile("/home/kakao/hakim_ws/src/drone_code/Results/path.txt");
     //std::ifstream inputFile("/home/airlab/hakim_ws/src/WTI_catkin/dji_m100_trajectory/src/matlab_plots/Results/wp_inter.txt");
         //std::ifstream inputFile("/home/airlab/hakim_ws/src/WTI_catkin/dji_m100_trajectory/src/GP_output/interpolatedwps.txt");
 
@@ -792,34 +792,15 @@ int main(int argc, char** argv)
             else{
                      n= waypointList.size()-40;
                      counter= waypointList.size()-40;
+					 
 			}        
               
                  
 				set_point(pointList[n].x,pointList[n].y,pointList[n].z, pointList[n-1].x,pointList[n-1].y,pointList[n-1].z);
-                
-
-                 
+                set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
                 set_norm(normList[n].x,normList[n].y,normList[n].z);
-			//else{
-                 //set_destination(waypointList[waypointList.size()-10].x,waypointList[waypointList.size()-10].y,waypointList[waypointList.size()-10].z, waypointList[waypointList.size()-10].psi);
-			//}
-			//}
-        //ROS_INFO("x %f", waypointList[counter-1].x);
-		//ROS_INFO("y %f", waypointList[counter-1].y);
-		//ROS_INFO("z %f", waypointList[counter-1].z);     
-        //ROS_INFO("Drone velocity %f", v_d);
-		//ROS_INFO("counter %d", n);
-	   // }
-		/*
-		ROS_INFO("current x %f", current_pose_g.pose.pose.position.x);
-		ROS_INFO("current y %f", current_pose_g.pose.pose.position.y);
-		ROS_INFO("current z %f", current_pose_g.pose.pose.position.z);
-	    ROS_INFO("yaw current %f", hakim*180.0/M_PI );
-		ROS_INFO("x %f", waypointList[counter-1].x);
-		ROS_INFO("y %f", waypointList[counter-1].y);
-		ROS_INFO("z %f", waypointList[counter-1].z);
-	    ROS_INFO("next yaw angle: %f", waypointList[counter-1].psi );
-		*/
+
+		
 	}
 	return 0;
 }
