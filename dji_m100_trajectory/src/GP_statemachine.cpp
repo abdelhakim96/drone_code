@@ -668,11 +668,7 @@ int main(int argc, char** argv)
 				float w =(pointList[n].z-pointList[n-1].z)/0.1;
 				
            
-				set_point(pointList[n].x,pointList[n].y,pointList[n].z, pointList[n-1].x,pointList[n-1].y,pointList[n-1].z);
-                
-
-                 
-                set_norm(normList[n].x,normList[n].y,normList[n].z);
+		
 
 
 
@@ -792,7 +788,11 @@ int main(int argc, char** argv)
 	           // ROS_INFO("Z  %f", waypointList[n].z);
 			    //ROS_INFO("pz  %f", pointList[n].z);
 			}
+				set_point(pointList[n].x,pointList[n].y,pointList[n].z, pointList[n-1].x,pointList[n-1].y,pointList[n-1].z);
+                
 
+                 
+                set_norm(normList[n].x,normList[n].y,normList[n].z);
 			//else{
                  //set_destination(waypointList[waypointList.size()-10].x,waypointList[waypointList.size()-10].y,waypointList[waypointList.size()-10].z, waypointList[waypointList.size()-10].psi);
 			//}
