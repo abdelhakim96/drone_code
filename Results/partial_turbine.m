@@ -37,6 +37,8 @@ scaling_z=15;
 
 blade_x=turbine_y(point:end)/scaling_xy;
 blade_y=turbine_x(point:end)/scaling_xy;
+blade_y=blade_y+2;
+
 blade_z=turbine_z(point:end)/scaling_z;
 
 
