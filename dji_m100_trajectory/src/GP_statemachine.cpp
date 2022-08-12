@@ -423,9 +423,9 @@ int main(int argc, char** argv)
     //vecY.push_back(wp_y-32);
     //vecZ.push_back(wp_z-70);
 	//vec1.push_back(y1);
-    vecX.push_back((wp_x+80.0)/scaling);
-    vecY.push_back(wp_y/scaling);
-    vecZ.push_back((wp_z-60.0)/scaling_z);
+    vecX.push_back((wp_x));
+    vecY.push_back(wp_y);
+    vecZ.push_back((wp_z));
 	vec1.push_back(y1);
 
 
