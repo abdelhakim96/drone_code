@@ -1443,7 +1443,7 @@ int main(int argc, char** argv)
             setpoint_pos_pub.publish(setpoint_pos_msg);
             ref_pose_pub.publish(setpoint_pos_msg);
         }
-
+        publish_inspection_point()
         traj_on_pub.publish(traj_on_msg);
         reg_on_pub.publish(reg_on_msg);
         ros::spinOnce();
@@ -1508,7 +1508,7 @@ void publish_inspection_point()
 
 
         //ref_point.pose.position.z =  current_pos[0];
-        ref_point.pose.position.z =  z;
+        ref_point.pose.position.z =  pz;
         ref_normal.pose.position.x = nxx;
         ref_normal.pose.position.y = nyy;
         ref_normal.pose.position.z = 0.0;
