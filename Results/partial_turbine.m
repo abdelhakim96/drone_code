@@ -15,7 +15,7 @@ turbine_nz=dlmread('Data/normals/nz_inter.txt');
 
 turbine_y=turbine_y+22;
 turbine_x=turbine_x+80;
-turbine_z=turbine_z-72;
+turbine_z=turbine_z-70;
 
 length(turbine_z)
 point=28800;

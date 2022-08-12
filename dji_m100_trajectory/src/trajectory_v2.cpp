@@ -1508,7 +1508,7 @@ void publish_inspection_point()
 
 
         //ref_point.pose.position.z =  current_pos[0];
-        ref_point.pose.position.z =  pz;
+        ref_point.pose.position.z =  z;
         ref_normal.pose.position.x = nxx;
         ref_normal.pose.position.y = nyy;
         ref_normal.pose.position.z = 0.0;
