@@ -647,7 +647,7 @@ int main(int argc, char** argv)
 
 
  // ct=n;
-			if (counter < pointList.size()-40)
+			if (n < pointList.size()-40)
 			{   
                   
 				n = counter * skip;
