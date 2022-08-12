@@ -790,8 +790,8 @@ int main(int argc, char** argv)
 			}
 
             else{
-                     n= waypointList.size()-40
-                     counter= waypointList.size()-40
+                     n= waypointList.size()-40;
+                     counter= waypointList.size()-40;
 			}        
         
                  
