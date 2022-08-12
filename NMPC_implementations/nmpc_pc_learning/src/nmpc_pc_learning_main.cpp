@@ -312,7 +312,7 @@ int main(int argc, char** argv)
         {
           
 
-            nmpc_struct.U_ref(2)=ref_yaw_rad.data;
+            nmpc_struct.U_ref(2)=ref_yaw_rad;
             t_cc_loop = ros::Time::now().toSec() - t;
             if (std::fmod(std::abs(t_cc_loop - (int)(t_cc_loop)), (double)(sampleTime)) == 0)
                 std::cout << "loop time for outer NMPC: " << t_cc_loop << " (sec)"
