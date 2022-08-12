@@ -647,7 +647,7 @@ int main(int argc, char** argv)
 
 
  // ct=n;
-			if (counter < waypointList.size()-10)
+			if (counter < waypointList.size()-40)
 			{   
                   
 				n = counter * skip;
@@ -788,6 +788,13 @@ int main(int argc, char** argv)
 	           // ROS_INFO("Z  %f", waypointList[n].z);
 			    //ROS_INFO("pz  %f", pointList[n].z);
 			}
+
+            else{
+                     n= waypointList.size()-40
+                     counter= waypointList.size()-40
+			}        
+        
+                 
 				set_point(pointList[n].x,pointList[n].y,pointList[n].z, pointList[n-1].x,pointList[n-1].y,pointList[n-1].z);
                 
 
