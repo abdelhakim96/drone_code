@@ -209,8 +209,7 @@ void set_destination(float x, float y, float z, float heading)
 	//waypoint_g.pose.orientation.yaw = psi;
     
 	local_pos_pub.publish(waypoint_g);
-	yaw_ang.data=waypointList[n].psi*(M_PI/180);
-    yaw_ang_pub.publish(yaw_ang);
+
 	
 }
 
