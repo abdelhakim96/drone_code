@@ -1443,7 +1443,7 @@ int main(int argc, char** argv)
             setpoint_pos_pub.publish(setpoint_pos_msg);
             ref_pose_pub.publish(setpoint_pos_msg);
         }
-        publish_inspection_point()
+        publish_inspection_point();
         traj_on_pub.publish(traj_on_msg);
         reg_on_pub.publish(reg_on_msg);
         ros::spinOnce();
