@@ -209,6 +209,8 @@ void set_destination(float x, float y, float z, float heading)
 	//waypoint_g.pose.orientation.yaw = psi;
     
 	local_pos_pub.publish(waypoint_g);
+	yaw_ang.data=waypointList[n].psi*(M_PI/180);
+    yaw_ang_pub.publish(yaw_ang);
 	
 }
 
@@ -567,7 +569,6 @@ int main(int argc, char** argv)
 	//set_heading( current_pose_g.pose.pose.position.x, current_pose_g.pose.pose.position.y, tx, ty);
     //set_point(tx,ty,current_pose_g.pose.pose.position.z);
     int counter = 1;
-	set_destination(waypointList[1].x,waypointList[1].y,waypointList[1].z, waypointList[1].psi);
 	//set_point(-80.0,0.0,current_pose_g.pose.position.z,-80.0,0.0,current_pose_g.pose.position.z);
 
 	set_norm(1.0,0.0,0.0);
@@ -661,7 +662,6 @@ int main(int argc, char** argv)
                
                
                 
-			  	set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
                 //set_heading(waypointList[n].psi);
 				float u =(pointList[n].x-pointList[n-1].x)/0.1;
 				float v =(pointList[n].y-pointList[n-1].y)/0.1;
@@ -752,8 +752,7 @@ int main(int argc, char** argv)
 
 
 
-				yaw_ang.data=waypointList[n].psi*(M_PI/180);
-                yaw_ang_pub.publish(yaw_ang);
+			
 
 
 
@@ -790,8 +789,8 @@ int main(int argc, char** argv)
 			}
 
             else{
-                     n= waypointList.size()-40;
-                     counter= waypointList.size()-40;
+                     n= pointList.size()-40;
+                     counter= pointList.size()-40;
 					 
 			}        
               
@@ -799,6 +798,8 @@ int main(int argc, char** argv)
 				set_point(pointList[n].x,pointList[n].y,pointList[n].z, pointList[n-1].x,pointList[n-1].y,pointList[n-1].z);
                 set_destination(waypointList[n].x,waypointList[n].y,waypointList[n].z, waypointList[n].psi);
                 set_norm(normList[n].x,normList[n].y,normList[n].z);
+				yaw_ang.data=waypointList[n].psi*(M_PI/180);
+                yaw_ang_pub.publish(yaw_ang);
 
 		
 	}
