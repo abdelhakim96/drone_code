@@ -160,3 +160,12 @@ run rqt_reconfigure rqt_reconfigure
 - Clean the repo from other folders - check
 - run NMPC, also with VICON 
 - run the NMPC with hovering from trajectory
+
+
+
+# problems with current drone design
+- Power regulator, use  a different one with no nob and place it inside the power supply container.
+- Landing gear, redsign the landing gear to be longer, more robust and with stand impact.
+- design a protector for the propellers.
+- design of better battery casing.
+- design camera mount and other sensors if needed.
