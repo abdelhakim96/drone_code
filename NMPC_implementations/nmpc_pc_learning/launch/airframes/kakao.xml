@@ -1,7 +1,7 @@
 <launch>
     <!-- matrice 100 -->
-    <param name="min_Fz_scale" type="double" value="$(eval 0 *1.0*9.81)" /> <!-- Minimum for Fz scaling = factor*m*g. -->
-    <param name="max_Fz_scale" type="double" value="$(eval 2 *1.0*9.81)" /> <!-- Maximum for Fz scaling = factor*m*g. -->
+    <param name="min_Fz_scale" type="double" value="$(eval 0 *1.04*9.81)" /> <!-- Minimum for Fz scaling = factor*m*g. -->
+    <param name="max_Fz_scale" type="double" value="$(eval 2 *1.04*9.81)" /> <!-- Maximum for Fz scaling = factor*m*g. -->
     <param name="W_Wn_factor" type="double" value="1.5" /> <!-- Factor for WN weights. -->
     <param name="phi_ref" type="double" value="0.0" /> <!-- Reference for roll angle. -->
     <param name="theta_ref" type="double" value="0.0" /> <!-- Reference for pitch angle. -->
