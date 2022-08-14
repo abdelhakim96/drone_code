@@ -13,7 +13,7 @@
     <param name="dist_Fy_data_topic" type="string" value="gp_disturb_reg/mu/y" /> <!-- Parameter to specify the topic name for dist_Fy_data. -->
     <param name="dist_Fz_data_topic" type="string" value="gp_disturb_reg/mu/z" /> <!-- Parameter to specify the topic name for dist_Fz_data. -->
 
-    <include file="$(find PAMPC)/launch/airframes/matrice_100_gazebo.xml" />
+    <include file="$(find PAMPC)/launch/airframes/kakao.xml" />
 
 
 </launch>
