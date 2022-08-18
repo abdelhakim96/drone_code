@@ -125,7 +125,7 @@ min_z=min(abs(blade_z));
 hold on
 
 
-zz=zeros(length(path(:,1)));
+
 wp_x=blade_x+0.5*blade_nx;
 wp_y=blade_y+0.5*blade_ny;
 wp_z=blade_z;
@@ -133,5 +133,5 @@ figure
 plot3(blade_x,blade_y,blade_z)
 hold on
 plot3(path(:,1),path(:,2),path(:,3))
-hold on
-quiver3( path(:,1),path(:,2),path(:,3), cos(path(:,4)),sin(path(:,4)), zz)
+
+
