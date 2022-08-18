@@ -27,6 +27,14 @@ void trajectory_start_cb(const std_msgs::Bool::ConstPtr& msg)
 {
     trajectory_start_flag = *msg;
 }
+
+
+void inspection_start_cb(const std_msgs::Bool::ConstPtr& msg)
+{
+    inspection_start_flag = *msg;
+}
+
+
 void ref_trajectory_cb(const geometry_msgs::Vector3::ConstPtr& msg)
 {
     ref_trajectory << msg->x, msg->y, msg->z;
@@ -194,6 +202,7 @@ int main(int argc, char **argv)
 
     // Other subscribers
     trajectory_start_sub = nh.subscribe<std_msgs::Bool>("trajectory_on", 1, trajectory_start_cb);
+    inspection_start_sub = nh.subscribe<std_msgs::Bool>("inspection_start", 1, inspection_start_cb);
     ref_trajectory_sub = nh.subscribe<geometry_msgs::Vector3>("ref_trajectory/position", 1, ref_trajectory_cb);
     ref_trajectory_delay_sub = nh.subscribe<geometry_msgs::Vector3>("ref_trajectory/position_delayed", 1, ref_trajectory_delay_cb);
     ref_velocity_sub = nh.subscribe<geometry_msgs::Vector3>("ref_trajectory/velocity", 1, ref_velocity_cb);
@@ -344,7 +353,7 @@ int main(int argc, char **argv)
         t = ros::Time::now().toSec();
         t_last = t;
 
-        while(ros::ok() && start_rec_cmd && trajectory_start_flag.data)
+        while(ros::ok() && start_rec_cmd && trajectory_start_flag.data && inspection_start_flag.data)
         {
             if(print_rec_start_flag == 1)
             {
