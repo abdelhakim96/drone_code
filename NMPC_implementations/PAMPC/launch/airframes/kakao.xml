@@ -11,7 +11,7 @@
     <param name="Fz_ref" type="double" value="$(eval 0.5)" /> <!-- Scaled Reference for throttle. -->
     <param name="W_x" type="double" value="30.0" /> <!-- Weight for x-position. -->
     <param name="W_y" type="double" value="30.0" /> <!-- Weight for y-position. -->
-    <param name="W_z" type="double" value="40.0" /> <!-- Weight for z-position. -->
+    <param name="W_z" type="double" value="30.0" /> <!-- Weight for z-position. -->
     <param name="W_q_x" type="double" value="60.0" /> <!-- Weight for x-quaternion. -->
     <param name="W_q_y" type="double" value="60.0" /> <!-- Weight for y-quaternion. -->
     <param name="W_q_z" type="double" value="0.0" /> <!-- Weight for z-quaternion. -->
@@ -19,7 +19,7 @@
     <param name="W_u" type="double" value="3.0" /> <!-- Weight for x-velocity. -->
     <param name="W_v" type="double" value="3.0" /> <!-- Weight for y-velocity. -->
     <param name="W_w" type="double" value="3.0" /> <!-- Weight for z-velocity. -->
-    <param name="W_s1" type="double" value="1.0" /> <!-- Weight for ref_point. -->
+    <param name="W_s1" type="double" value="0.5" /> <!-- Weight for ref_point. -->
     <param name="W_s2" type="double" value="0.000" /> <!-- Weight for ref_point. -->
     <param name="W_p_rate" type="double" value="1.0" /> <!-- Weight for roll rate. -->
     <param name="W_q_rate" type="double" value="1.0" /> <!-- Weight for pitch rate. -->
