@@ -12,7 +12,7 @@
 using namespace Eigen;
 using namespace ros;
 
-double sampleTime = 0.02;
+double sampleTime = 0.01;
 
 mavros_msgs::State current_state_msg;
 void state_cb(const mavros_msgs::State::ConstPtr& msg)
