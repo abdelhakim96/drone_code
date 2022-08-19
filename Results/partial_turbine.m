@@ -111,7 +111,43 @@ path(:,3)=blade_z;
 path(:,4)=path_psi;
 
 
-writematrix(path, "path.txt");
+
+
+
+
+
+
+
+for i=1:length(path(:,1))
+   if (0.5 <= blade_nx(i))   &&  (blade_nx(i) <=1)
+       yaw_a(i)=180;
+       
+   end
+   
+   if (-0.5 >= blade_nx(i))   &&  (blade_nx(i) >=-1)
+       yaw_a(i)=360;
+       
+   end
+   
+    if (0.5 <= blade_ny(i))   &&  (blade_ny(i) <=1)
+       yaw_a(i)=270;
+       
+    end
+    
+    if (-0.5 >= blade_ny(i))   &&  (blade_ny(i) >=-1)
+       yaw_a(i)=90+360;
+       
+    end
+    
+
+end
+
+path(:,4)=yaw_a;
+
+
+dlmwrite('path.txt',path,'delimiter',' ')
+
+%writematrix(path, "path.txt");
 
 
 
@@ -123,6 +159,7 @@ max_y=max(abs(blade_y));
 max_z=max(abs(blade_z));
 min_z=min(abs(blade_z));
 hold on
+
 
 
 

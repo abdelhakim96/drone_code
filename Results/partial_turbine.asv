@@ -1,3 +1,7 @@
+
+close all
+clear all
+clc
 wp=dlmread('/home/hakim/drone_code/Results/Data/WP_trajectory/wp_inter.txt');
 
 
@@ -101,6 +105,47 @@ writematrix(blade_ny, "blade_ny.txt");
 writematrix(blade_nz, "blade_nz.txt");
 
 
+path(:,1)=blade_x+0.5*blade_nx;
+path(:,2)=blade_y+0.5*blade_ny;
+path(:,3)=blade_z;
+path(:,4)=path_psi;
+
+
+
+
+
+
+
+
+
+for i=1:length(path(:,1))
+   if (0.5 <= nx_inter(i))   &&  (nx_inter(i) <=1)
+       yaw_a(i)=180;
+       
+   end
+   
+   if (-0.5 >= nx_inter(i))   &&  (nx_inter(i) >=-1)
+       yaw_a(i)=360;
+       
+   end
+   
+    if (0.5 <= ny_inter(i))   &&  (ny_inter(i) <=1)
+       yaw_a(i)=270;
+       
+    end
+    
+    if (-0.5 >= ny_inter(i))   &&  (ny_inter(i) >=-1)
+       yaw_a(i)=90+360;
+       
+    end
+    
+    if i>=36624
+        yaw_a(i)= 360+180;
+    end
+end
+
+
+
 
 writematrix(path, "path.txt");
 
@@ -117,12 +162,13 @@ hold on
 
 
 
+
 wp_x=blade_x+0.5*blade_nx;
 wp_y=blade_y+0.5*blade_ny;
 wp_z=blade_z;
 figure 
 plot3(blade_x,blade_y,blade_z)
 hold on
-%plot3(wp_x,wp_y,wp_z)
+plot3(path(:,1),path(:,2),path(:,3))
 
 
