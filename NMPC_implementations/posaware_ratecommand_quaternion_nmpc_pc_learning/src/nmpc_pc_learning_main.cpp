@@ -30,7 +30,7 @@ void ref_velocity_cb(const geometry_msgs::Vector3::ConstPtr& msg)
 void ref_yaw_cb(const std_msgs::Float64::ConstPtr& msg)
 {
     ref_yaw_rad = msg->data;
-    ref_att_quat.setRPY(0.0, 0.0, ref_yaw_rad);
+    ref_att_quat.setRPY(0.0, 0.0, ref_yaw_rad*(180/3.17));
 }
 void ref_point_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
