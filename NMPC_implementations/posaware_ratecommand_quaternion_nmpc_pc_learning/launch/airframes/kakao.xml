@@ -18,7 +18,7 @@
     <param name="W_q_y" type="double" value="60.0" /> <!-- Weight for y-quaternion. -->
     <param name="W_q_z" type="double" value="30.0" /> <!-- Weight for z-quaternion. -->
     <param name="W_q_w" type="double" value="30.0" /> <!-- Weight for w-quaternion. -->
-    <param name="W_s" type="double" value="20.0" /> <!-- Weight for ref_point. -->
+    <param name="W_s" type="double" value="0.0" /> <!-- Weight for ref_point. -->
     <param name="W_sdot" type="double" value="0.0" /> <!-- Weight for ref_point derivative. -->
     <param name="W_p_rate" type="double" value="2.0" /> <!-- Weight for roll rate. -->
     <param name="W_q_rate" type="double" value="2.0" /> <!-- Weight for pitch rate. -->
