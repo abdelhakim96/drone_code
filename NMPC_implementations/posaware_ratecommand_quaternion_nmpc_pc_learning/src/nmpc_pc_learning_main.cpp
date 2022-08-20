@@ -346,10 +346,10 @@ int main(int argc, char** argv)
 
         while (ros::ok() && current_state_msg.mode == "OFFBOARD" && !control_stop)
         {
-            if (online_ref_yaw)
-            {
-                nmpc_struct.ref_yaw = ref_yaw_rad;
-            }
+            //if (online_ref_yaw)
+            //{
+                //nmpc_struct.ref_yaw = ref_yaw_rad;
+            //}
             t_cc_loop = ros::Time::now().toSec() - t;
             if (std::fmod(std::abs(t_cc_loop - (int)(t_cc_loop)), (double)(sampleTime)) == 0)
                 std::cout << "loop time for outer NMPC: " << t_cc_loop << " (sec)"
