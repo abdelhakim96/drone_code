@@ -2,7 +2,7 @@
 <launch>
     <!-- matrice 100 -->
     <param name="min_Fz_scale" type="double" value="$(eval 0.0 *1.09*9.81)" /> <!-- Minimum for Fz scaling = factor*m*g. -->
-    <param name="max_Fz_scale" type="double" value="$(eval 2.4 *1.09*9.81)" /> <!-- Maximum for Fz scaling = factor*m*g. -->
+    <param name="max_Fz_scale" type="double" value="$(eval 2.0 *1.09*9.81)" /> <!-- Maximum for Fz scaling = factor*m*g. -->
     <param name="W_Wn_factor" type="double" value="1.5" /> <!-- Factor for WN weights. -->
     <param name="p_rate_ref" type="double" value="0.0" /> <!-- Reference for roll rate. -->
     <param name="q_rate_ref" type="double" value="0.0" /> <!-- Reference for pitch rate. -->
@@ -16,13 +16,13 @@
     <param name="W_q_y" type="double" value="60.0" /> <!-- Weight for y-quaternion. -->
     <param name="W_q_z" type="double" value="0.0" /> <!-- Weight for z-quaternion. -->
     <param name="W_q_w" type="double" value="0.0" /> <!-- Weight for w-quaternion. -->
-    <param name="W_u" type="double" value="3.0" /> <!-- Weight for x-velocity. -->
-    <param name="W_v" type="double" value="3.0" /> <!-- Weight for y-velocity. -->
-    <param name="W_w" type="double" value="3.0" /> <!-- Weight for z-velocity. -->
-    <param name="W_s1" type="double" value="0.05" /> <!-- Weight for ref_point. -->
+    <param name="W_u" type="double" value="1.0" /> <!-- Weight for x-velocity. -->
+    <param name="W_v" type="double" value="1.0" /> <!-- Weight for y-velocity. -->
+    <param name="W_w" type="double" value="2.0" /> <!-- Weight for z-velocity. -->
+    <param name="W_s1" type="double" value="0.3" /> <!-- Weight for ref_point. -->
     <param name="W_s2" type="double" value="0.000" /> <!-- Weight for ref_point. -->
-    <param name="W_p_rate" type="double" value="3.0" /> <!-- Weight for roll rate. -->
-    <param name="W_q_rate" type="double" value="3.0" /> <!-- Weight for pitch rate. -->
+    <param name="W_p_rate" type="double" value="2.0" /> <!-- Weight for roll rate. -->
+    <param name="W_q_rate" type="double" value="2.0" /> <!-- Weight for pitch rate. -->
     <param name="W_r_rate" type="double" value="0.5" /> <!-- Weight for yaw rate. -->
     <param name="W_Fz" type="double" value="0.08" /> <!-- Weight for throttle. -->
 </launch>
