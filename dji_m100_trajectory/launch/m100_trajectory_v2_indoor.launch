@@ -1,6 +1,8 @@
 <launch>
-    <node name="recdata" pkg="dji_m100_trajectory" type="recdata" output="screen" />
+    <node name="GP_node" pkg="dji_m100_trajectory" type="GP_node" output="screen" />
 
+    <node name="recdata" pkg="dji_m100_trajectory" type="recdata" output="screen" />
+    
     <node name="m100_trajectory_v2" pkg="dji_m100_trajectory" type="m100_trajectory_v2" output="screen"/>
 	<param name="mocap_topic" type="string" value="/mavros/mocap/pose" />
     	<param name="Llidar_topic" type="string" value="/teraranger_evo_l" />
@@ -20,7 +22,7 @@
 
    
     <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
-
+   
 
 
 </launch>
