@@ -1104,11 +1104,11 @@ b[25] = nmpcWorkspace.rk_dim26_bPerm[25];
 
 /** Matrix of size: 2 x 2 (row major format) */
 static const real_t nmpc_Ah_mat[ 4 ] = 
-{ 2.5000000000000001e-02, 5.3867513459481292e-02, 
--3.8675134594812867e-03, 2.5000000000000001e-02 };
+{ 2.5000000000000001e-03, 5.3867513459481290e-03, 
+-3.8675134594812866e-04, 2.5000000000000001e-03 };
 
 
-/* Fixed step size:0.1 */
+/* Fixed step size:0.01 */
 int nmpc_integrate( real_t* const rk_eta, int resetIntegrator )
 {
 int error;
@@ -1346,7 +1346,7 @@ nmpcWorkspace.rk_diffK[i + 24] = nmpcWorkspace.rk_b[i * 13 + 12];
 for (i = 0; i < 13; ++i)
 {
 nmpcWorkspace.rk_diffsNew2[(i * 17) + (run1)] = (i == run1-0);
-nmpcWorkspace.rk_diffsNew2[(i * 17) + (run1)] += + nmpcWorkspace.rk_diffK[i * 2]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_diffK[i * 2 + 1]*(real_t)5.0000000000000003e-02;
+nmpcWorkspace.rk_diffsNew2[(i * 17) + (run1)] += + nmpcWorkspace.rk_diffK[i * 2]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_diffK[i * 2 + 1]*(real_t)5.0000000000000001e-03;
 }
 }
 for (run1 = 0; run1 < 4; ++run1)
@@ -1379,22 +1379,22 @@ nmpcWorkspace.rk_diffK[i + 24] = nmpcWorkspace.rk_b[i * 13 + 12];
 }
 for (i = 0; i < 13; ++i)
 {
-nmpcWorkspace.rk_diffsNew2[(i * 17) + (run1 + 13)] = + nmpcWorkspace.rk_diffK[i * 2]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_diffK[i * 2 + 1]*(real_t)5.0000000000000003e-02;
+nmpcWorkspace.rk_diffsNew2[(i * 17) + (run1 + 13)] = + nmpcWorkspace.rk_diffK[i * 2]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_diffK[i * 2 + 1]*(real_t)5.0000000000000001e-03;
 }
 }
-rk_eta[0] += + nmpcWorkspace.rk_kkk[0]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[1]*(real_t)5.0000000000000003e-02;
-rk_eta[1] += + nmpcWorkspace.rk_kkk[2]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[3]*(real_t)5.0000000000000003e-02;
-rk_eta[2] += + nmpcWorkspace.rk_kkk[4]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[5]*(real_t)5.0000000000000003e-02;
-rk_eta[3] += + nmpcWorkspace.rk_kkk[6]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[7]*(real_t)5.0000000000000003e-02;
-rk_eta[4] += + nmpcWorkspace.rk_kkk[8]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[9]*(real_t)5.0000000000000003e-02;
-rk_eta[5] += + nmpcWorkspace.rk_kkk[10]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[11]*(real_t)5.0000000000000003e-02;
-rk_eta[6] += + nmpcWorkspace.rk_kkk[12]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[13]*(real_t)5.0000000000000003e-02;
-rk_eta[7] += + nmpcWorkspace.rk_kkk[14]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[15]*(real_t)5.0000000000000003e-02;
-rk_eta[8] += + nmpcWorkspace.rk_kkk[16]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[17]*(real_t)5.0000000000000003e-02;
-rk_eta[9] += + nmpcWorkspace.rk_kkk[18]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[19]*(real_t)5.0000000000000003e-02;
-rk_eta[10] += + nmpcWorkspace.rk_kkk[20]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[21]*(real_t)5.0000000000000003e-02;
-rk_eta[11] += + nmpcWorkspace.rk_kkk[22]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[23]*(real_t)5.0000000000000003e-02;
-rk_eta[12] += + nmpcWorkspace.rk_kkk[24]*(real_t)5.0000000000000003e-02 + nmpcWorkspace.rk_kkk[25]*(real_t)5.0000000000000003e-02;
+rk_eta[0] += + nmpcWorkspace.rk_kkk[0]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[1]*(real_t)5.0000000000000001e-03;
+rk_eta[1] += + nmpcWorkspace.rk_kkk[2]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[3]*(real_t)5.0000000000000001e-03;
+rk_eta[2] += + nmpcWorkspace.rk_kkk[4]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[5]*(real_t)5.0000000000000001e-03;
+rk_eta[3] += + nmpcWorkspace.rk_kkk[6]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[7]*(real_t)5.0000000000000001e-03;
+rk_eta[4] += + nmpcWorkspace.rk_kkk[8]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[9]*(real_t)5.0000000000000001e-03;
+rk_eta[5] += + nmpcWorkspace.rk_kkk[10]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[11]*(real_t)5.0000000000000001e-03;
+rk_eta[6] += + nmpcWorkspace.rk_kkk[12]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[13]*(real_t)5.0000000000000001e-03;
+rk_eta[7] += + nmpcWorkspace.rk_kkk[14]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[15]*(real_t)5.0000000000000001e-03;
+rk_eta[8] += + nmpcWorkspace.rk_kkk[16]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[17]*(real_t)5.0000000000000001e-03;
+rk_eta[9] += + nmpcWorkspace.rk_kkk[18]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[19]*(real_t)5.0000000000000001e-03;
+rk_eta[10] += + nmpcWorkspace.rk_kkk[20]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[21]*(real_t)5.0000000000000001e-03;
+rk_eta[11] += + nmpcWorkspace.rk_kkk[22]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[23]*(real_t)5.0000000000000001e-03;
+rk_eta[12] += + nmpcWorkspace.rk_kkk[24]*(real_t)5.0000000000000001e-03 + nmpcWorkspace.rk_kkk[25]*(real_t)5.0000000000000001e-03;
 for (i = 0; i < 13; ++i)
 {
 for (j = 0; j < 13; ++j)
